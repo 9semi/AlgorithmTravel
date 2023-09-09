@@ -79,25 +79,39 @@ namespace AlgorithmTravel
                 Merge(array, iStartIndex, iMiddleIndex, iEndIndex);
             }
         }
-        public void Merge(int [] array, int iStartIndex, int iMiddleIndex, int iEndIndex)
+        void Merge(int [] array, int iStartIndex, int iMiddleIndex, int iEndIndex)
         {
             int[] arrTemp = new int[array.Length];
-            int iTempArrayIndex = 0;
-            int iFirstPartStartIndex = iStartIndex;
-            int iSecondPartStartIndex = iMiddleIndex + 1;
+            int iTempArrayIndex = iStartIndex;
+            int iFirstPartIndex = iStartIndex;
+            int iSecondPartIndex = iMiddleIndex + 1;
 
-            while(iFirstPartStartIndex <= iMiddleIndex && iSecondPartStartIndex <= iEndIndex)
+            while(iFirstPartIndex <= iMiddleIndex && iSecondPartIndex <= iEndIndex)
             {
-                if(array[iFirstPartStartIndex] > array[iSecondPartStartIndex])
+                if(array[iFirstPartIndex] < array[iSecondPartIndex])
                 {
-                    arrTemp[iTempArrayIndex++] = array[iFirstPartStartIndex++];
+                    arrTemp[iTempArrayIndex++] = array[iFirstPartIndex++];
                 }
                 else
                 {
-                    arrTemp[iTempArrayIndex++] = array[iSecondPartStartIndex++];
+                    arrTemp[iTempArrayIndex++] = array[iSecondPartIndex++];
                 }
             }
-            
+
+            while (iFirstPartIndex <= iMiddleIndex)
+            {
+                arrTemp[iTempArrayIndex++] = array[iFirstPartIndex++];
+            }
+
+            while (iSecondPartIndex <= iEndIndex)
+            {
+                arrTemp[iTempArrayIndex++] = array[iSecondPartIndex++];
+            }
+
+            for(int i = iStartIndex; i <= iEndIndex; i++)
+            {
+                array[i] = arrTemp[i];
+            }
         }
     }
 }
