@@ -17,7 +17,7 @@ namespace AlgorithmTravel
             //sortClass.SelectionSort(arrSortArray);
             //sortClass.InsertionSort(arrSortArray);
             //sortClass.MergeSort(arrSortArray, 0, arrSortArray.Length - 1);
-            sortClass.QuickSort2(arrSortArray, 0, arrSortArray.Length - 1);
+            sortClass.QuickSort(arrSortArray, 0, arrSortArray.Length - 1);
             sortClass.PrintArray(arrSortArray);
         }
     }
