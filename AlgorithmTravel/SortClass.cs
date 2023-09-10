@@ -113,5 +113,44 @@ namespace AlgorithmTravel
                 array[i] = arrTemp[i];
             }
         }
+
+        public void QuickSort(int [] array, int iStartIndex, int iEndIndex)
+        {
+            if(iStartIndex < iEndIndex)
+            {
+                int iPivotIndex = Partition(array, iStartIndex, iEndIndex);
+
+                QuickSort(array, iStartIndex, iPivotIndex-1);
+                QuickSort(array, iPivotIndex, iEndIndex);
+            }
+        }
+        public int Partition(int [] array, int iStartIndex, int iEndIndex)
+        {
+            int iPivotData = array[(iStartIndex + iEndIndex) / 2];
+
+            while(iStartIndex <= iEndIndex)
+            {
+                while(array[iStartIndex] < iPivotData)
+                {
+                    iStartIndex++;
+                }
+                while(array[iEndIndex] > iPivotData)
+                {
+                    iEndIndex--;
+                }
+
+                if(iStartIndex <= iEndIndex)
+                {
+                    int temp = array[iStartIndex];
+                    array[iStartIndex] = array[iEndIndex];
+                    array[iEndIndex] = temp;
+
+                    iStartIndex++;
+                    iEndIndex--;
+                }
+            }
+
+            return iStartIndex;
+        }
     }
 }
