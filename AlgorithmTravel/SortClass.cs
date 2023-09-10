@@ -18,19 +18,36 @@ namespace AlgorithmTravel
 
         public void BubbleSort(int[] array)
         {
+            //int iEndNumber;
+
+            //for (int i = 0; i < array.Length; i++)
+            //{
+            //    iEndNumber = array.Length - i;
+
+            //    for (int k = 1; k < iEndNumber; k++)
+            //    {
+            //        if (array[k - 1] > array[k])
+            //        {
+            //            int temp = array[k - 1];
+            //            array[k - 1] = array[k];
+            //            array[k] = temp;
+            //        }
+            //    }
+            //}
+
             int iEndNumber;
 
-            for (int i = 0; i < array.Length; i++)
+            for(int i = 0; i < array.Length; i++)
             {
                 iEndNumber = array.Length - i;
 
-                for (int k = 1; k < iEndNumber; k++)
+                for(int k = 1; k < iEndNumber; k++)
                 {
-                    if (array[k - 1] > array[k])
+                    if (array[i] > array[k])
                     {
-                        int temp = array[k - 1];
-                        array[k - 1] = array[k];
-                        array[k] = temp;
+                        int iTemp = array[i];
+                        array[i] = array[k];
+                        array[k] = iTemp;
                     }
                 }
             }
