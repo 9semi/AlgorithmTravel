@@ -2,9 +2,9 @@
 
 using namespace std;
 
+int iAnswer = 0;
 int TargetNumberBFS(vector<int> numbers, int target)
 {
-	int iAnswer = 0;
 	queue<pair<int, int>> q;
 	q.push(make_pair(0, numbers[0]));
 	q.push(make_pair(0, -numbers[0]));
@@ -31,10 +31,24 @@ int TargetNumberBFS(vector<int> numbers, int target)
 	}
 	return iAnswer;
 }
+void TargetNumberDFS(vector<int> numbers, int target, int count, int sum)
+{
+	if (count == numbers.size())
+	{
+		if (sum == target)
+		{
+			iAnswer++;
+		}
+		return;
+	}
+	TargetNumberDFS(numbers, target, count + 1, sum + numbers[count]);
+	TargetNumberDFS(numbers, target, count + 1, sum - numbers[count]);
+	return;
+}
 
 int Level2::InterceptionSystem(vector<vector<int>> targets)
 {
-	int answer = 0;
+	int iAnswer = 0;
 
 	sort(targets.begin(), targets.end(), [](const std::vector<int>& a, const std::vector<int>& b) {
 		return a[0] < b[0];
@@ -53,15 +67,17 @@ int Level2::InterceptionSystem(vector<vector<int>> targets)
 		{
 			s = vec[0];
 			e = vec[1];
-			answer++;
+			iAnswer++;
 		}
 	}
 
-	return answer;
+	return iAnswer;
 }
 int Level2::TargetNumber(vector<int> numbers, int target)
 {
-	return TargetNumberBFS(numbers, target);
+	//return TargetNumberBFS(numbers, target);
+	TargetNumberDFS(numbers, 4, 0, 0);
+	return iAnswer;
 }
 
 
