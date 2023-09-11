@@ -36,3 +36,36 @@ vector<string> Level1::RunningRace(vector<string> players, vector<string> callin
 
 	return answer;
 }
+
+vector<int> Level1::MemoryScore(vector<string> name, vector<int> yearning, vector<vector<string>> photo)
+{
+	int iIndex = 0;
+	bool bIsFirst = true;
+	vector<int> vecAnswer;
+	map<string, int> mapYearning;
+
+	for (int i = 0; i < name.size(); i++)
+	{
+		mapYearning.insert({ name[i], yearning[i] });
+	}
+
+	for (const auto& innerVec : photo)
+	{
+		for (const auto& element : innerVec)
+		{
+			if (bIsFirst)
+			{
+				vecAnswer.push_back(mapYearning[element]);
+				bIsFirst = false;
+			}
+			else
+			{
+				vecAnswer[iIndex] += mapYearning[element];
+			}
+		}
+		bIsFirst = true;
+		iIndex++;
+	}
+
+	return vecAnswer;
+}
