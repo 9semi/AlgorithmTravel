@@ -79,5 +79,19 @@ int Level2::TargetNumber(vector<int> numbers, int target)
 	TargetNumberDFS(numbers, 4, 0, 0);
 	return iAnswer;
 }
+int Level2::GameMapShortestDistance(vector<vector<int>> maps)
+{
+	int iGoalPositionX = maps[0].size() - 1;
+	int iGoalPositionY = maps.size() - 1;
+
+	if (maps[iGoalPositionX - 1][iGoalPositionY] == 0 && maps[iGoalPositionX - 1][iGoalPositionY - 1] == 0 && maps[iGoalPositionX][iGoalPositionY - 1] == 0)
+	{
+		return -1;
+	}
+	else
+	{
+		return 0;
+	}
+}
 
 
