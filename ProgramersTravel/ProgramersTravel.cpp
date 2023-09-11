@@ -43,12 +43,19 @@ int main()
 		//ShowResult(L2.TargetNumber(numbers, 4));
 	}
 	{
-		vector<string> name = { "may", "kein", "kain", "radi" };
-		vector<int> yearning = { 5, 10, 1, 3 };
-		vector<vector<string>> photo = { {"may", "kein", "kain", "radi"},{"may", "kein", "brin", "deny"},{"kon", "kain", "may", "coni"} };
-		vector<int> result = L1.MemoryScore(name, yearning, photo);
+		//vector<string> name = { "may", "kein", "kain", "radi" };
+		//vector<int> yearning = { 5, 10, 1, 3 };
+		//vector<vector<string>> photo = { {"may", "kein", "kain", "radi"},{"may", "kein", "brin", "deny"},{"kon", "kain", "may", "coni"} };
+		//vector<int> result = L1.MemoryScore(name, yearning, photo);
+		//ShowResult(result);
+	}
+	{
+		//vector<vector<int>> maps = { {1, 0, 1, 1, 1},{1, 0, 1, 0, 1},{1, 0, 1, 1, 1},{1, 1, 1, 0, 1},{0, 0, 0, 0, 1},{0, 0, 0, 0, 1} };
+		vector<vector<int>> maps = { {1,0,1,1,1},{1,0,1,0,1},{1,0,1,1,1},{1,1,1,0,0},{0,0,0,0,1} };
+		int result = L2.GameMapShortestDistance(maps);
 		ShowResult(result);
 	}
+
 }
 
 
