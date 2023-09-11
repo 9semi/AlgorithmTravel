@@ -30,3 +30,4 @@ int Level2::InterceptionSystem(vector<vector<int>> targets)
 	return answer;
 }
 
+
