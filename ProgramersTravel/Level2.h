@@ -12,5 +12,5 @@ public:
 	int InterceptionSystem(vector<vector<int>> targets);
 	int TargetNumber(vector<int> numbers, int target);
 	int GameMapShortestDistance(vector<vector<int>> maps);
-	vector<int> SumOfSuccessivePartialSequences(vector<int> sequence, int k)
+	vector<int> SumOfSuccessivePartialSequences(vector<int> sequence, int k);
 };

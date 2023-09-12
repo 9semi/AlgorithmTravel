@@ -45,9 +45,6 @@ void TargetNumberDFS(vector<int> numbers, int target, int count, int sum)
 	TargetNumberDFS(numbers, target, count + 1, sum - numbers[count]);
 	return;
 }
-
-
-
 int Level2::InterceptionSystem(vector<vector<int>> targets)
 {
 	int iAnswer = 0;
@@ -82,61 +79,63 @@ int Level2::TargetNumber(vector<int> numbers, int target)
 	return iAnswer;
 }
 
-int ny[4] = { 0, 1, 0, -1 };
-int nx[4] = { -1, 0, 1 ,0 };
-struct XY
+int addRow[4] = { -1, 0, 1, 0 };
+int addCol[4] = { 0, 1, 0 , -1 };
+struct RowCol
 {
-	int x, y;
+	int row, col;
 
-	XY(int iX, int iY) { x = iX; y = iY; }
+	RowCol(int iRow, int iCol) { row = iRow; col = iCol; }
 };
 int GameMapShortestDistanceBFS(vector<vector<int>> maps)
 {
-	int iCount = 0;
-	XY xy(0, 0);
+	RowCol rc(0, 0);
 
-	queue<XY> q;
-	q.push(xy);
+	queue<RowCol> q;
+	q.push(rc);
 
-	int iMaxY = maps[0].size(); // 5
-	int iMaxX = maps.size(); // 6
+	int iMaxRow = maps.size();
+	int iMaxCol = maps[0].size();
 
-	vector<vector<bool>> visit(iMaxY, vector<bool>(iMaxX, false));
+	vector<vector<bool>> visit(iMaxRow, vector<bool>(iMaxCol));
 	visit[0][0] = true;
 
-	vector<vector<int>> distance(iMaxY, vector<int>(iMaxX, 0));
+	vector<vector<int>> distance(iMaxRow, vector<int>(iMaxCol));
 	distance[0][0] = 1;
 
 	while (!q.empty())
 	{
-		int iCurrentX = q.front().x;
-		int iCurrentY = q.front().y;
+		int iCurrentRow = q.front().row;
+		int iCurrentCol = q.front().col;
 		q.pop();
 
 		for (int i = 0; i < 4; i++)
 		{
-			int iNextX = iCurrentX + ny[i];
-			int iNextY = iCurrentY + nx[i];
+			int iNextRow = iCurrentRow + addRow[i];
+			int iNextCol = iCurrentCol + addCol[i];
 
-			if (iNextX < 0 || iNextX > iMaxY - 1 || iNextY < 0 || iNextY > iMaxX - 1)
+			if (iNextRow < 0 
+				|| iNextRow > iMaxRow - 1
+				|| iNextCol < 0
+				|| iNextCol > iMaxCol - 1)
 				continue;
 
-			if (maps[iNextX][iNextY] == 0)
+			if (maps[iNextRow][iNextCol] == 0)
 				continue;
 
-			if (visit[iNextX][iNextY])
+			if (visit[iNextRow][iNextCol])
 				continue;
 
-			XY temp(iNextX, iNextY);
+			RowCol temp(iNextRow, iNextCol);
 			q.push(temp);
-			visit[iNextX][iNextY] = true;
-			distance[iNextX][iNextY] = distance[iCurrentX][iCurrentY] + 1;
+			visit[iNextRow][iNextCol] = true;
+			distance[iNextRow][iNextCol] = distance[iCurrentRow][iCurrentCol] + 1;
 		}
 	}
-	if (!visit[iMaxX - 1][iMaxY - 1])
+	if (!visit[iMaxRow - 1][iMaxCol - 1])
 		return -1;
 	else
-		return distance[iMaxX - 1][iMaxY - 1];
+		return distance[iMaxRow - 1][iMaxCol - 1];
 
 }
 int Level2::GameMapShortestDistance(vector<vector<int>> maps)
