@@ -202,4 +202,68 @@ vector<int> Level2::SumOfSuccessivePartialSequences(vector<int> sequence, int k)
 	return answer;
 }
 
+vector<int> answer;
+bool bArrVisitPlace[101][101];
+vector<int> iRow = { 0, 0, -1, 1 };
+vector<int> iCol = { 1, -1, 0, 0 };
+bool SearchRangeDistinction(vector<string> maps, int searchRow, int searchCol)
+{
+	if (searchRow >= maps.size()) return false;
+	else if (searchRow < 0) return false;
+	else if (searchCol >= maps[0].size()) return false;
+	else if (searchCol < 0) return false;
+	else if (maps[searchRow][searchCol] == 'X') return false;
+	else if (bArrVisitPlace[searchRow][searchCol]) return false;
+	else return true;
+}
+void DesertedIslandTripBFS(vector<string> maps, int currentRow, int currentCol)
+{
+	int sum = 0;
+	queue<pair<int, int>> qBFS;
+	qBFS.push({ currentRow, currentCol });
+	bArrVisitPlace[currentRow][currentCol] = true;
+
+	while (qBFS.size() > 0)
+	{
+		int x = qBFS.front().first;
+		int y = qBFS.front().second;
+
+		sum += maps[x][y] - '0';
+		qBFS.pop();
+
+		for (int i = 0; i < 4; i++)
+		{
+			int searchRow = x + iRow[i];
+			int searchCol = y + iCol[i];
+
+			if (SearchRangeDistinction(maps, searchRow, searchCol))
+			{
+				bArrVisitPlace[searchRow][searchCol] = true;
+				qBFS.push({ searchRow, searchCol });
+			}
+		}
+	}
+
+	answer.push_back(sum);
+}
+vector<int> DesertedIslandTrip(vector<string> maps)
+{
+	for (int i = 0; i < maps.size(); i++)
+	{
+		for (int k = 0; k < maps[i].size(); k++)
+		{
+			if (maps[i][k] != 'X' && !bArrVisitPlace[i][k])
+			{
+				DesertedIslandTripBFS(maps, i, k);
+			}
+		}
+	}
+
+	if (answer.size() <= 0)
+		answer.push_back(-1);
+	else
+		sort(answer.begin(), answer.end());
+
+	return answer;
+}
 
