@@ -50,12 +50,13 @@ int main()
 		//ShowResult(result);
 	}
 	{
-		vector<vector<int>> maps = { {1, 0, 1, 1, 1},{1, 0, 1, 0, 1},{1, 0, 1, 1, 1},{1, 1, 1, 0, 1},{0, 0, 0, 0, 1} };
-		//vector<vector<int>> maps = { {1,0,1,1,1},{1,0,1,0,1},{1,0,1,1,1},{1,1,1,0,0},{0,0,0,0,1} };
-		int result = L2.GameMapShortestDistance(maps);
-		ShowResult(result);
+		//vector<vector<int>> maps = { {1, 0, 1, 1, 1},{1, 0, 1, 0, 1},{1, 0, 1, 1, 1},{1, 1, 1, 0, 1},{0, 0, 0, 0, 1} };
+		//int result = L2.GameMapShortestDistance(maps);
+		//ShowResult(result);
 	}
+	{
 
+	}
 }
 
 
