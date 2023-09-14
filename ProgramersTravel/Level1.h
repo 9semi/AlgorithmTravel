@@ -17,5 +17,6 @@ public:
 	vector<int> BuiltInKeyBoard(vector<string> keymap, vector<string> targets);
 	string BunchOfCards(vector<string> cards1, vector<string> cards2, vector<string> goal);
 	string SecretCodeForTheTwo(string s, string skip, int index);
+	vector<int> PersonalInformationCollectionPeriod(string today, vector<string> terms, vector<string> privacies);
 };
 
