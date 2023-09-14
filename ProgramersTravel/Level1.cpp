@@ -369,3 +369,34 @@ string Level1::BunchOfCards(vector<string> cards1, vector<string> cards2, vector
 
 	return answer;
 }
+
+string Level1::SecretCodeForTheTwo(string s, string skip, int index)
+{
+	string answer = "";
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		char chTemp = s[i];
+
+		for (int k = 0; k < index; k++)
+		{
+			chTemp += 1;
+
+			if (chTemp > 'z')
+			{
+				chTemp = 'a';
+			}
+
+			size_t found = skip.find(chTemp);
+
+			if (found != string::npos)
+			{
+				k--;
+			}
+		}
+
+		s[i] = chTemp;
+	}
+	answer = s;
+	return answer;
+}
