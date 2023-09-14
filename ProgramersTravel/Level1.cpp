@@ -400,3 +400,57 @@ string Level1::SecretCodeForTheTwo(string s, string skip, int index)
 	answer = s;
 	return answer;
 }
+
+vector<int> Level1::PersonalInformationCollectionPeriod(string today, vector<string> terms, vector<string> privacies)
+{
+	size_t dot1 = today.find('.');
+	size_t dot2 = today.find('.', dot1 + 1);
+
+	int iTodayYear = stoi(today.substr(0, dot1)) - 2000;
+	int iTodayMonth = stoi(today.substr(dot1 + 1, dot2 - dot1 - 1));
+	int iTodayDay = stoi(today.substr(dot2 + 1));
+	int iTodaySum = (iTodayYear * 336) + (iTodayMonth * 28) + iTodayDay;
+
+	vector<int> answer;
+	map<char, int> mapTerm;
+
+	for (int i = 0; i < terms.size(); i++)
+	{
+		size_t space = terms[i].find(' ');
+		char chTermsType = terms[i][0];
+		int iTermsMonth = stoi(terms[i].substr(space + 1));
+		mapTerm.insert(make_pair(chTermsType, iTermsMonth));
+	}
+
+	for (int i = 0; i < privacies.size(); i++)
+	{
+		size_t dot1 = privacies[i].find('.');
+		size_t dot2 = privacies[i].find('.', dot1 + 1);
+		size_t space = privacies[i].find(' ');
+
+		int iExpirationYear = stoi(privacies[i].substr(0, dot1)) - 2000;
+		int iExpirationMonth = stoi(privacies[i].substr(dot1 + 1, dot2 - dot1 - 1));
+		int iExpirationDay = stoi(privacies[i].substr(dot2 + 1, 2));
+		char type = privacies[i].substr(space + 1)[0];
+
+		iExpirationMonth += mapTerm[type];
+
+		if (iExpirationMonth > 12)
+		{
+			int rest = iExpirationMonth % 12;
+			int division = iExpirationMonth / 12;
+
+			iExpirationYear += division;
+			iExpirationMonth = rest;
+		}
+
+		int sum = (iExpirationYear * 336) + (iExpirationMonth * 28) + iExpirationDay;
+
+		if (sum <= iTodaySum)
+		{
+			answer.push_back(i + 1);
+		}
+	}
+
+	return answer;
+}
