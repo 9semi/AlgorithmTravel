@@ -246,7 +246,7 @@ void DesertedIslandTripBFS(vector<string> maps, int currentRow, int currentCol)
 
 	answer.push_back(sum);
 }
-vector<int> DesertedIslandTrip(vector<string> maps)
+vector<int> Level2::DesertedIslandTrip(vector<string> maps)
 {
 	for (int i = 0; i < maps.size(); i++)
 	{
@@ -263,6 +263,57 @@ vector<int> DesertedIslandTrip(vector<string> maps)
 		answer.push_back(-1);
 	else
 		sort(answer.begin(), answer.end());
+
+	return answer;
+}
+
+int Level2::MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2)
+{
+	int answer = 0;
+	unsigned int iSumQueue1 = 0;
+	unsigned int iSumQueue2 = 0;
+	int iTemp = 0;
+	int iLimitCount = queue1.size() * 4;
+
+	queue<int> qQueue1;
+	queue<int> qQueue2;
+
+	for (int i = 0; i < queue1.size(); i++)
+	{
+		iSumQueue1 += queue1[i];
+		iSumQueue2 += queue2[i];
+		qQueue1.push(queue1[i]);
+		qQueue2.push(queue2[i]);
+	}
+
+	while (iSumQueue1 != iSumQueue2)
+	{
+		if (answer > iLimitCount)
+			return -1;
+
+		if (iSumQueue1 > iSumQueue2)
+		{
+			iTemp = qQueue1.front();
+			qQueue1.pop();
+			qQueue2.push(iTemp);
+
+			iSumQueue1 -= iTemp;
+			iSumQueue2 += iTemp;
+
+			answer++;
+		}
+		else
+		{
+			iTemp = qQueue2.front();
+			qQueue2.pop();
+			qQueue1.push(iTemp);
+
+			iSumQueue2 -= iTemp;
+			iSumQueue1 += iTemp;
+
+			answer++;
+		}
+	}
 
 	return answer;
 }
