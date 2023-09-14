@@ -454,3 +454,39 @@ vector<int> Level1::PersonalInformationCollectionPeriod(string today, vector<str
 
 	return answer;
 }
+
+int Level1::KnightsWeapon(int number, int limit, int power)
+{
+	int answer = 0;
+	vector<int> vecDivisors;
+
+
+	for (int i = 1; i <= number; i++)
+	{
+		int iSqrtNumber = sqrt(i);
+		int iCount = 0;
+
+		for (int k = 1; k <= iSqrtNumber; k++)
+		{
+			if (i % k == 0)
+			{
+				iCount++;
+
+				if (k != (i / k))
+					iCount++;
+			}
+		}
+
+		if (iCount > limit)
+			vecDivisors.push_back(power);
+		else
+			vecDivisors.push_back(iCount);
+	}
+
+	for (int i = 0; i < vecDivisors.size(); i++)
+	{
+		answer += vecDivisors[i];
+	}
+
+	return answer;
+}
