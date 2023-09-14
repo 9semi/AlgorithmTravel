@@ -16,5 +16,6 @@ public:
 	int Overpainting(int n, int m, vector<int> section);
 	vector<int> BuiltInKeyBoard(vector<string> keymap, vector<string> targets);
 	string BunchOfCards(vector<string> cards1, vector<string> cards2, vector<string> goal);
+	string SecretCodeForTheTwo(string s, string skip, int index);
 };
 
