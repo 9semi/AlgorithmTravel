@@ -14,4 +14,5 @@ public:
 	int GameMapShortestDistance(vector<vector<int>> maps);
 	vector<int> SumOfSuccessivePartialSequences(vector<int> sequence, int k);
 	vector<int> DesertedIslandTrip(vector<string> maps);
+	int MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2);
 };
