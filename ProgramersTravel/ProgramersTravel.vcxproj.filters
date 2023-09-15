@@ -24,12 +24,21 @@
     <ClCompile Include="Level1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Level3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level2.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Level1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Level3.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
