@@ -45,6 +45,13 @@ void TargetNumberDFS(vector<int> numbers, int target, int count, int sum)
 	TargetNumberDFS(numbers, target, count + 1, sum - numbers[count]);
 	return;
 }
+int Level2::TargetNumber(vector<int> numbers, int target)
+{
+	//return TargetNumberBFS(numbers, target);
+	TargetNumberDFS(numbers, 4, 0, 0);
+	return iAnswer;
+}
+
 int Level2::InterceptionSystem(vector<vector<int>> targets)
 {
 	int iAnswer = 0;
@@ -70,12 +77,6 @@ int Level2::InterceptionSystem(vector<vector<int>> targets)
 		}
 	}
 
-	return iAnswer;
-}
-int Level2::TargetNumber(vector<int> numbers, int target)
-{
-	//return TargetNumberBFS(numbers, target);
-	TargetNumberDFS(numbers, 4, 0, 0);
 	return iAnswer;
 }
 

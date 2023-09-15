@@ -1,5 +1,4 @@
-﻿#include "Level1.h"
-#include "Level2.h"
+﻿#include "Level3.h"
 
 using namespace std;
 
@@ -30,11 +29,12 @@ int main()
 {
 	Level1 L1;
 	Level2 L2;
+	Level3 L3;
 
 	{
-		vector<int> q1 = { 3,2,7,2 };
-		vector<int> q2 = { 4,6,5,1 };
-		int result = L2.MakeTheSumOfTheTwoQueuesEqual(q1, q2);
+		int n = 3;
+		vector<vector<int>> computers = { {1, 1, 0},{1, 1, 0},{0, 0, 1 } };
+		int result = L3.Network(n, computers);
 		ShowResult(result);
 	}
 }
