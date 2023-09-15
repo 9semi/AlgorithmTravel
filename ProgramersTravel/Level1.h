@@ -1,8 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <map>
+#include "Header.h";
 
 using namespace std;
 

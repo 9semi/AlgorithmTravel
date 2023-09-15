@@ -1,8 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <queue>
+#include "Level1.h"
 
 using namespace std;
 
