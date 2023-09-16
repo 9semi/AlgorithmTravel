@@ -10,14 +10,62 @@ namespace AlgorithmTravel
     {
         static void Main(string[] args)
         {
-            int[] arrSortArray = { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            //int[] sortArray = { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
             SortClass sortClass = new SortClass();
-            //sortClass.BubbleSort(arrSortArray);
-            //sortClass.SelectionSort(arrSortArray);
-            //sortClass.InsertionSort(arrSortArray);
-            //sortClass.MergeSort(arrSortArray, 0, arrSortArray.Length - 1);
-            sortClass.QuickSort(arrSortArray, 0, arrSortArray.Length - 1);
-            sortClass.PrintArray(arrSortArray);
+            //sortClass.BubbleSort(sortArray);
+            //sortClass.SelectionSort(sortArray);
+            //sortClass.InsertionSort(sortArray);
+            //sortClass.MergeSort(sortArray, 0, sortArray.Length - 1);
+            //sortClass.QuickSort(sortArray, 0, sortArray.Length - 1);
+            //PrintArray(sortArray);
+            RunAllMethod(sortClass);
+        }
+
+        static void RunAllMethod(SortClass sc)
+        {
+            int[] sortArray = { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            Console.Write("버블 정렬 전: ");
+            PrintArray(sortArray);
+            sc.BubbleSort(sortArray);
+            Console.Write("                                                 버블 정렬 후: ");
+            PrintArray(sortArray);
+
+            sortArray = new int[] { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            Console.Write("선택 정렬 전: ");
+            PrintArray(sortArray);
+            sc.SelectionSort(sortArray);
+            Console.Write("                                                선택 정렬 후: ");
+            PrintArray(sortArray);
+
+            sortArray = new int[] { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            Console.Write("삽입 정렬 전: ");
+            PrintArray(sortArray);
+            sc.InsertionSort(sortArray);
+            Console.Write("                                                 삽입 정렬 후: ");
+            PrintArray(sortArray);
+
+            sortArray = new int[] { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            Console.Write("합병 정렬 전: ");
+            PrintArray(sortArray);
+            sc.MergeSort(sortArray, 0, sortArray.Length - 1);
+            Console.Write("                                               합병 정렬 후: ");
+            PrintArray(sortArray);  
+
+            sortArray = new int[] { 6, 85, 231, 112, 14, 64, 22, 1, 78 };
+            Console.Write("퀵 정렬 전: ");
+            PrintArray(sortArray);
+            sc.QuickSort(sortArray, 0, sortArray.Length - 1);
+            Console.Write("                                               퀵 정렬 후: ");
+            PrintArray(sortArray);
+        }
+
+        static void PrintArray(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+            Console.WriteLine();
         }
     }
 }
