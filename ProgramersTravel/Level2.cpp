@@ -319,3 +319,89 @@ int Level2::MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2
 	return answer;
 }
 
+//                    →  ←   ↑  ↓
+vector<int> iAddX = { 0, 0, -1, 1 };
+vector<int> iAddY = { 1, -1, 0, 0 };
+int Level2::RicochetRobot(vector<string> board)
+{
+	int iStartX = -1, iStartY = -1;
+	int iGoalX, iGoalY;
+
+	for (int i = 0; i < board.size(); i++)
+	{
+		for (int k = 0; k < board[0].size(); k++)
+		{
+			if (board[i][k] == 'R')
+			{
+				iStartX = i;
+				iStartY = k;
+				break;
+			}
+		}
+
+		if (iStartX != -1)
+			break;
+	}
+	queue<pair<int, int>> q;
+	q.push({ iStartX, iStartY });
+
+	queue<int> qCount;
+	qCount.push(0);
+
+	int visit[100][100] = { 0, };
+
+	while (!q.empty())
+	{
+		int iMaxX = board.size();
+		int iMaxY = board[0].size();
+		int iCurrentX = q.front().first;
+		int iCurrentY = q.front().second;
+		int iCurrentCount = qCount.front();
+
+		q.pop();
+		qCount.pop();
+
+		if (board[iCurrentX][iCurrentY] == 'G')
+		{
+			return iCurrentCount;
+		}
+
+		// 순서 : 오, 왼, 위, 아
+		for (int i = 0; i < 4; i++)
+		{
+			int tempX = iCurrentX;
+			int tempY = iCurrentY;
+		
+			if (iAddX[i] != 0)
+			{
+				while (tempX > -1 && tempX < iMaxX && board[tempX][iCurrentY] != 'D')
+				{
+					tempX += iAddX[i];
+				}
+
+				if (visit[tempX - iAddX[i]][iCurrentY] == 0)
+				{
+					visit[tempX - iAddX[i]][iCurrentY] = 1;
+					q.push({ tempX - iAddX[i], iCurrentY });
+					qCount.push(iCurrentCount + 1);
+				}
+			}
+			else if (iAddY[i] != 0)
+			{
+				while (tempY > -1 && tempY < iMaxY && board[iCurrentX][tempY] != 'D')
+				{
+					tempY += iAddY[i];
+				}
+
+				if (visit[iCurrentX][tempY - iAddY[i]] == 0)
+				{
+					visit[iCurrentX][tempY - iAddY[i]] = 1;
+					q.push({ iCurrentX, tempY - iAddY[i] });
+					qCount.push(iCurrentCount + 1);
+				}
+			}
+		}
+	}
+	return -1;
+}
+
