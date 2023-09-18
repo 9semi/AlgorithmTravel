@@ -405,3 +405,95 @@ int Level2::RicochetRobot(vector<string> board)
 	return -1;
 }
 
+int iResult = 0;
+void EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWord, int iCount)
+{
+	int iMaxX = maps.size();
+	int iMaxY = maps[0].size();
+
+	queue<pair<int, int>> q;
+	queue<int> qCount;
+	int visit[100][100] = { 0, };
+
+	q.push({ iStartX, iStartY });
+	qCount.push(iCount);
+
+	visit[iStartX][iStartY] = 1;
+
+	while (!q.empty())
+	{
+		int iCurrentX = q.front().first;
+		int iCurrentY = q.front().second;
+		q.pop();
+
+		int iCurrentCount = qCount.front();
+		qCount.pop();
+
+		visit[iCurrentX][iCurrentY] = 1;
+
+		if (maps[iCurrentX][iCurrentY] == 'L' && goalWord == 'L')
+		{
+			EscapeTheMazeBFS(maps, iCurrentX, iCurrentY, 'E', iCurrentCount);
+			break;
+		}
+		
+		if(maps[iCurrentX][iCurrentY] == 'E' && goalWord == 'E')
+		{
+			iResult = iCurrentCount;
+			break;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			int newX = iCurrentX + iAddX[i];
+			int newY = iCurrentY + iAddY[i];
+
+			if (newX < iMaxX && newX > -1 && newY < iMaxY && newY > -1 && maps[newX][newY] != 'X' && visit[newX][newY] != 1)
+			{
+				q.push({ newX, newY });
+				qCount.push(iCurrentCount + 1);
+			}
+		}
+	}
+}
+int Level2::EscapeTheMaze(vector<string> maps)
+{
+	int iStartX = -1, iStartY = -1;
+	bool bCheckCanMove = false;
+	for (int i = 0; i < maps.size(); i++)
+	{
+		for (int k = 0; k < maps[0].size(); k++)
+		{
+			if (maps[i][k] == 'S')
+			{
+				iStartX = i; iStartY = k;
+				break;
+			}
+		}
+		if (iStartX > -1)
+			break;
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		int newX = iStartX + iAddX[i];
+		int newY = iStartY + iAddY[i];
+
+		if (newX > -1 && newX < maps.size() && newY > -1 && newY < maps[0].size())
+		{
+			if (maps[newX][newY] == 'O' || maps[newX][newY] == 'L' || maps[newX][newY] == 'E')
+			{
+				bCheckCanMove = true;
+				break;
+			}
+		}
+	}
+
+	if (!bCheckCanMove)
+		return -1;
+
+	EscapeTheMazeBFS(maps, iStartX, iStartY, 'L', 0);
+	return iResult;
+
+}
+

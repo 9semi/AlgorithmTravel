@@ -32,8 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> b = { "...D..R", ".D.G...", "....D.D", "D....D.", "..D...." };
-		cout << L2.RicochetRobot(b);
+		vector<string> maps = { "LOOXS","OOOOX","OOOOO","OOOOO","EOOOO" };
+		cout << L2.EscapeTheMaze(maps);
 	}
 }
 

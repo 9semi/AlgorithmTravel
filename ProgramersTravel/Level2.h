@@ -12,4 +12,5 @@ public:
 	vector<int> DesertedIslandTrip(vector<string> maps);
 	int MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2);
 	int RicochetRobot(vector<string> board);
+	int EscapeTheMaze(vector<string> maps);
 };
