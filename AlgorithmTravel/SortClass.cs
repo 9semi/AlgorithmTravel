@@ -11,15 +11,16 @@ namespace AlgorithmTravel
         public void BubbleSort(int[] array)
         {
             {
-                for(int i = 0; i < array.Length - 1; i++)
+                for(int i = 0; i < array.Length; i++)
                 {
                     int iEndNumber = array.Length - i;
+
                     for(int k = 1; k < iEndNumber; k++)
                     {
                         if(array[k - 1] > array[k])
                         {
                             int iTemp = array[k - 1];
-                            array[k-1] = array[k];
+                            array[k - 1] = array[k];
                             array[k] = iTemp;
                         }
                     }
@@ -47,13 +48,15 @@ namespace AlgorithmTravel
         public void SelectionSort(int[] array)
         {
             {
-                for(int i = 0; i < array.Length - 1; i++)
+                for(int i = 0; i < array.Length-1; i++)
                 {
-                    for (int k = i + 1; k < array.Length; k++)
+                    for(int k = i + 1; k < array.Length; k++)
                     {
-                        if(array[i] > array[k])
+                        if (array[i] > array[k])
                         {
-                            int iTemp = array[i]; array[i] = array[k]; array[k] = iTemp;
+                            int iTemp = array[i];
+                            array[i] = array[k];
+                            array[k] = iTemp;
                         }
                     }
                 }
@@ -82,10 +85,12 @@ namespace AlgorithmTravel
                 {
                     int iKey = array[i];
                     int k = i - 1;
+
                     for (; k >= 0 && iKey < array[k]; k--) 
                     {
                         array[k + 1] = array[k];
                     }
+
                     array[k + 1] = iKey;
                 }
             }
@@ -112,7 +117,6 @@ namespace AlgorithmTravel
                 if(iStartIndex < iEndIndex)
                 {
                     int iMiddleIndex = (iStartIndex + iEndIndex) / 2;
-
                     MergeSort(array, iStartIndex, iMiddleIndex);
                     MergeSort(array, iMiddleIndex + 1, iEndIndex);
 
@@ -135,36 +139,35 @@ namespace AlgorithmTravel
         void Merge(int[] array, int iStartIndex, int iMiddleIndex, int iEndIndex)
         {
             {
-                int[] tempArray = new int[array.Length];
-                int iTempArrayIndex = iStartIndex;
+                int[] arrayTemp = new int[array.Length];
+                int arrayTempIndex = iStartIndex;
                 int iFirstPartIndex = iStartIndex;
                 int iSecondPartIndex = iMiddleIndex + 1;
 
                 while(iFirstPartIndex <= iMiddleIndex && iSecondPartIndex <= iEndIndex)
                 {
-                    if (array[iFirstPartIndex] > array[iSecondPartIndex])
+                    if(array[iFirstPartIndex] < array[iSecondPartIndex])
                     {
-                        tempArray[iTempArrayIndex++] = array[iSecondPartIndex++];
+                        arrayTemp[arrayTempIndex++] = array[iFirstPartIndex++];
                     }
                     else
                     {
-                        tempArray[iTempArrayIndex++] = array[iFirstPartIndex++];
+                        arrayTemp[arrayTempIndex++] = array[iSecondPartIndex++];
                     }
                 }
 
                 while(iFirstPartIndex <= iMiddleIndex)
                 {
-                    tempArray[iTempArrayIndex++] = array[iFirstPartIndex++];
+                    arrayTemp[arrayTempIndex++] = array[iFirstPartIndex++];
                 }
-
                 while(iSecondPartIndex <= iEndIndex)
                 {
-                    tempArray[iTempArrayIndex++] = array[iSecondPartIndex++];
+                    arrayTemp[arrayTempIndex++] = array[iSecondPartIndex++];
                 }
 
                 for (int i = iStartIndex; i <= iEndIndex; i++)
                 {
-                    array[i] = tempArray[i];
+                    array[i] = arrayTemp[i];
                 }
             }
 
@@ -210,7 +213,6 @@ namespace AlgorithmTravel
                 if(iStartIndex < iEndIndex)
                 {
                     int iMiddleIndex = Partition(array, iStartIndex, iEndIndex);
-
                     QuickSort(array, iStartIndex, iMiddleIndex - 1);
                     QuickSort(array, iMiddleIndex, iEndIndex);
                 }
@@ -229,22 +231,20 @@ namespace AlgorithmTravel
         public int Partition(int [] array, int iStartIndex, int iEndIndex)
         {
             {
-                int iPivotData = array[(iStartIndex + iEndIndex) / 2];
-
                 while (iStartIndex <= iEndIndex)
                 {
+                    int iPivotData = array[(iStartIndex + iEndIndex) / 2];
 
-
-
-                    while (iPivotData > array[iStartIndex])
+                    while (array[iStartIndex] < iPivotData)
                     {
                         iStartIndex++;
                     }
 
-                    while (iPivotData < array[iEndIndex])
+                    while (array[iEndIndex] > iPivotData)
                     {
                         iEndIndex--;
                     }
+
 
                     if (iStartIndex <= iEndIndex)
                     {
