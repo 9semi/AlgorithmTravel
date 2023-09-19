@@ -405,8 +405,7 @@ int Level2::RicochetRobot(vector<string> board)
 	return -1;
 }
 
-int iResult = 0;
-void EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWord, int iCount)
+int EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWord)
 {
 	int iMaxX = maps.size();
 	int iMaxY = maps[0].size();
@@ -416,7 +415,7 @@ void EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWo
 	int visit[100][100] = { 0, };
 
 	q.push({ iStartX, iStartY });
-	qCount.push(iCount);
+	qCount.push(0);
 
 	visit[iStartX][iStartY] = 1;
 
@@ -429,18 +428,14 @@ void EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWo
 		int iCurrentCount = qCount.front();
 		qCount.pop();
 
-		visit[iCurrentX][iCurrentY] = 1;
-
 		if (maps[iCurrentX][iCurrentY] == 'L' && goalWord == 'L')
 		{
-			EscapeTheMazeBFS(maps, iCurrentX, iCurrentY, 'E', iCurrentCount);
-			break;
+			return iCurrentCount;
 		}
 		
 		if(maps[iCurrentX][iCurrentY] == 'E' && goalWord == 'E')
 		{
-			iResult = iCurrentCount;
-			break;
+			return iCurrentCount;
 		}
 
 		for (int i = 0; i < 4; i++)
@@ -448,18 +443,25 @@ void EscapeTheMazeBFS(vector<string> maps, int iStartX, int iStartY, char goalWo
 			int newX = iCurrentX + iAddX[i];
 			int newY = iCurrentY + iAddY[i];
 
-			if (newX < iMaxX && newX > -1 && newY < iMaxY && newY > -1 && maps[newX][newY] != 'X' && visit[newX][newY] != 1)
+			if (newX < iMaxX && newX > -1 && newY < iMaxY && newY > -1)
 			{
-				q.push({ newX, newY });
-				qCount.push(iCurrentCount + 1);
+				if (maps[newX][newY] != 'X' && visit[newX][newY] != 1)
+				{
+					q.push({ newX, newY });
+					qCount.push(iCurrentCount + 1);
+					visit[iCurrentX][iCurrentY] = 1;
+				}
 			}
+
 		}
 	}
 }
 int Level2::EscapeTheMaze(vector<string> maps)
 {
 	int iStartX = -1, iStartY = -1;
+	int iLeverX = -1, iLeverY = -1;
 	bool bCheckCanMove = false;
+
 	for (int i = 0; i < maps.size(); i++)
 	{
 		for (int k = 0; k < maps[0].size(); k++)
@@ -467,9 +469,17 @@ int Level2::EscapeTheMaze(vector<string> maps)
 			if (maps[i][k] == 'S')
 			{
 				iStartX = i; iStartY = k;
-				break;
 			}
+
+			if (maps[i][k] == 'L')
+			{
+				iLeverX = i; iLeverY = k;
+			}
+
+			if (iStartX != -1 && iLeverX != -1)
+				break;
 		}
+
 		if (iStartX > -1)
 			break;
 	}
@@ -492,8 +502,10 @@ int Level2::EscapeTheMaze(vector<string> maps)
 	if (!bCheckCanMove)
 		return -1;
 
-	EscapeTheMazeBFS(maps, iStartX, iStartY, 'L', 0);
-	return iResult;
+	int iFindL = EscapeTheMazeBFS(maps, iStartX, iStartY, 'L');
+	int iFindE = EscapeTheMazeBFS(maps, iLeverX, iLeverY, 'E');
+
+	return iFindE + iFindL;
 
 }
 
