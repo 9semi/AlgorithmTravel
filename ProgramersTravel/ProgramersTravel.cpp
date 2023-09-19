@@ -32,8 +32,9 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> maps = { "LOOXS","OOOOX","OOOOO","OOOOO","EOOOO" };
+		vector<string> maps = { "SOOOL","XXXXO","OOOOO","OXXXX","OOOOE" };
 		cout << L2.EscapeTheMaze(maps);
+
 	}
 }
 
