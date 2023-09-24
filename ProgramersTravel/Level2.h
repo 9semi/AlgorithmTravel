@@ -13,4 +13,5 @@ public:
 	int MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2);
 	int RicochetRobot(vector<string> board);
 	int EscapeTheMaze(vector<string> maps);
+	long long SeesawPartner(vector<int> weights);
 };

@@ -472,3 +472,43 @@ int Level2::EscapeTheMaze(vector<string> maps)
 		return iFindE + iFindL;
 }
 
+long long  Level2::SeesawPartner(vector<int> weights)
+{
+	int iWeightsLengh = weights.size();
+	vector<int> vecDistance = { 2,3,4 };
+	long long answer = 0;
+	map<int, int> mWeight;
+	map<int, int> mSameWeightCount;
+
+	for (int i = 0; i < iWeightsLengh; i++)
+	{
+		if (mSameWeightCount.count(weights[i]) > 0)
+		{
+			answer -= mSameWeightCount[weights[i]] * 2;
+			mSameWeightCount[weights[i]] += 1;
+		}
+		else
+		{
+			mSameWeightCount.insert(make_pair(weights[i], 1));
+		}
+
+		for (int k = 0; k < 3; k++)
+		{
+			int iKey = weights[i] * vecDistance[k];
+
+			if (mWeight.count(iKey) > 0)
+			{
+				int value = mWeight[iKey];
+
+				answer += value;
+				mWeight[iKey] = value + 1;
+			}
+			else
+			{
+				mWeight.insert(make_pair(iKey, 1));
+			}
+		}
+	}
+	return answer;
+}
+
