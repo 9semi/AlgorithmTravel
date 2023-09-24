@@ -32,8 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> maps = { "SOOOL","XXXXO","OOOOO","OXXXX","OOOOE" };
-		cout << L2.EscapeTheMaze(maps);
+		vector<int> weights = { 100,180,360,100,270 };
+		cout << L2.SeesawPartner(weights);
 
 	}
 }
