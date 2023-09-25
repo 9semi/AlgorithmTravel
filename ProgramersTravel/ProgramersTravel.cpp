@@ -32,9 +32,9 @@ int main()
 	Level3 L3;
 
 	{
-		vector<int> weights = { 100,180,360,100,270 };
-		cout << L2.SeesawPartner(weights);
-
+		int storey = 555;
+		int result = L2.MagicalElevator(storey);
+		ShowResult(result);
 	}
 }
 
