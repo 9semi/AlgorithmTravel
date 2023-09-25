@@ -512,3 +512,52 @@ long long  Level2::SeesawPartner(vector<int> weights)
 	return answer;
 }
 
+int Level2::MagicalElevator(int storey)
+{
+	vector<int> vResult;
+	queue<vector<int>> q;
+	q.push({ storey, 0 });
+
+	while (!q.empty())
+	{
+		vector<int> temp = q.front();
+
+		int currentStorey = temp[0];
+		int currentCount = temp[1];
+		q.pop();
+
+		if (currentStorey == 0)
+		{
+			vResult.push_back(currentCount);
+			continue;
+		}
+
+		int rest = currentStorey % 10;
+		
+		if (rest == 0)
+		{
+			q.push({ currentStorey / 10, currentCount });
+			continue;
+		}
+
+		if (rest > 5)
+		{
+			currentStorey += 10 - rest;
+			q.push({ currentStorey, currentCount + (10 - rest)});
+		}
+		else if (rest < 5)
+		{
+			currentStorey -= rest;
+			q.push({ currentStorey, currentCount + rest });
+		}
+		else
+		{
+			q.push({ currentStorey + rest, currentCount + rest });
+			q.push({ currentStorey - rest, currentCount + rest });
+		}
+	}
+
+	sort(vResult.begin(), vResult.end());
+	return vResult[0];
+}
+
