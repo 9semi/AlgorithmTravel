@@ -15,4 +15,5 @@ public:
 	int EscapeTheMaze(vector<string> maps);
 	long long SeesawPartner(vector<int> weights);
 	int MagicalElevator(int storey);
+	int ConvertNumbers(int x, int y, int n);
 };
