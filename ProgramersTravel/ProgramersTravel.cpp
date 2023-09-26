@@ -32,8 +32,7 @@ int main()
 	Level3 L3;
 
 	{
-		int storey = 555;
-		int result = L2.MagicalElevator(storey);
+		int result = L2.ConvertNumbers(10, 40, 5);
 		ShowResult(result);
 	}
 }

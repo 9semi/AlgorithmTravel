@@ -561,3 +561,50 @@ int Level2::MagicalElevator(int storey)
 	return vResult[0];
 }
 
+int Level2::ConvertNumbers(int x, int y, int n)
+{
+	queue<vector<int>> q;
+	map<int, int> m;
+
+	q.push({ x, 0 });
+	m.insert({ x, 1 });
+
+	while (!q.empty())
+	{
+		vector<int> temp = q.front();
+		q.pop();
+		
+		if (temp[0] == y)
+		{
+			return temp[1];
+		}
+		else if (temp[0] > y)
+		{
+			continue;
+		}
+
+		int iCurrentX = temp[0];
+
+		if (m.count(iCurrentX + n) == 0)
+		{
+			q.push({ iCurrentX + n, temp[1] + 1 });
+			m.insert({ iCurrentX + n, 1 });
+		}
+			
+		if (m.count(iCurrentX * 2) == 0)
+		{
+			q.push({ iCurrentX * 2, temp[1] + 1 });
+			m.insert({ iCurrentX * 2, 1 });
+		}
+
+		if (m.count(iCurrentX * 3) == 0)
+		{
+			q.push({ iCurrentX * 3, temp[1] + 1 });
+			m.insert({ iCurrentX * 3, 1 });
+		}
+			
+	}
+
+	return -1;
+}
+
