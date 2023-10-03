@@ -608,3 +608,37 @@ int Level2::ConvertNumbers(int x, int y, int n)
 	return -1;
 }
 
+vector<int> Level2::FindALargeNumberAtTheBack(vector<int> numbers)
+{
+	vector<int> tempVector;
+	stack<int> tempStack;
+
+	tempStack.push(numbers[numbers.size() - 1]);
+	tempVector.push_back(-1);
+
+	for (int i = numbers.size() - 2; i >= 0; i--)
+	{
+		int iTemp = -1;
+
+		while (!tempStack.empty)
+		{
+			if (tempStack.top > numbers[i])
+			{
+				iTemp = tempStack.top;
+				break;
+			}
+			else
+			{
+				tempStack.pop();
+			}
+		}
+
+		tempVector.push_back(iTemp);
+		tempStack.push(numbers[i]);
+	}
+
+	reverse(tempVector.begin(), tempVector.end());
+
+	return tempVector;
+}
+
