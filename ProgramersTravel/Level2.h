@@ -16,4 +16,5 @@ public:
 	long long SeesawPartner(vector<int> weights);
 	int MagicalElevator(int storey);
 	int ConvertNumbers(int x, int y, int n);
+	vector<int> FindALargeNumberAtTheBack(vector<int> numbers);
 };
