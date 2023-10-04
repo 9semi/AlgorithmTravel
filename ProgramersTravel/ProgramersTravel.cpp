@@ -32,7 +32,7 @@ int main()
 	Level3 L3;
 
 	{
-		int result = L2.ConvertNumbers(10, 40, 5);
+		int result = L2.Dot(1, 5);
 		ShowResult(result);
 	}
 }
