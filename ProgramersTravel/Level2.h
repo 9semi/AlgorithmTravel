@@ -17,4 +17,6 @@ public:
 	int MagicalElevator(int storey);
 	int ConvertNumbers(int x, int y, int n);
 	vector<int> FindALargeNumberAtTheBack(vector<int> numbers);
+	long long Dot(int k, int d);
+
 };

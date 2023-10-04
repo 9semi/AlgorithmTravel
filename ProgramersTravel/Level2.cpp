@@ -620,11 +620,11 @@ vector<int> Level2::FindALargeNumberAtTheBack(vector<int> numbers)
 	{
 		int iTemp = -1;
 
-		while (!tempStack.empty)
+		while (!tempStack.empty())
 		{
-			if (tempStack.top > numbers[i])
+			if (tempStack.top() > numbers[i])
 			{
-				iTemp = tempStack.top;
+				iTemp = tempStack.top();
 				break;
 			}
 			else
@@ -642,3 +642,21 @@ vector<int> Level2::FindALargeNumberAtTheBack(vector<int> numbers)
 	return tempVector;
 }
 
+long long Level2::Dot(int k, int d)
+{
+	long long answer = 0;
+	long long dd = pow(d, 2);
+
+	for (int i = 0; i <= d; i += k)
+	{
+		long long xx = pow(i, 2);
+		
+		int yy = (int)sqrt(dd - xx);
+		
+		int temp = yy / k + 1;
+
+		answer += temp;
+	}
+
+	return answer;
+}
