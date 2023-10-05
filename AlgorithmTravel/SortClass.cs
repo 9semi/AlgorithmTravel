@@ -217,6 +217,7 @@ namespace AlgorithmTravel
                     int iMiddleIndex = Partition(array, iStartIndex, iEndIndex);
 
                     QuickSort(array, iStartIndex, iMiddleIndex - 1);
+
                     QuickSort(array, iMiddleIndex, iEndIndex);
                 }
             }
