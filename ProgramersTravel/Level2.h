@@ -5,6 +5,14 @@ using namespace std;
 class Level2
 {
 public:
+	struct RowCol
+	{
+		int row;
+		int col;
+
+		RowCol(int x, int y) : row(x), col(y) { }
+	};
+
 	int InterceptionSystem(vector<vector<int>> targets);
 	int TargetNumber(vector<int> numbers, int target);
 	int GameMapShortestDistance(vector<vector<int>> maps);
@@ -18,5 +26,5 @@ public:
 	int ConvertNumbers(int x, int y, int n);
 	vector<int> FindALargeNumberAtTheBack(vector<int> numbers);
 	long long Dot(int k, int d);
-
+	vector<int> CheckDistancing(vector<vector<string>> places);
 };
