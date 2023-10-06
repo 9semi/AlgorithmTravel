@@ -660,3 +660,87 @@ long long Level2::Dot(int k, int d)
 
 	return answer;
 }
+
+
+
+vector<int> Level2::CheckDistancing(vector<vector<string>> places)
+{
+	vector<int> answer;
+	queue<Level2::RowCol> q;
+	bool visit[5][5];
+
+	for (int i = 0; i < places.size(); i++)
+	{
+		memset(visit, false, sizeof(visit));
+
+		for (int k = 0; k < places[0].size(); k++)
+		{
+			string line = places[i][k];
+
+			for (int n = 0; n < line.size(); n++)
+			{
+				if (line[n] == 'P')
+				{
+					q.push(Level2::RowCol(k,n));
+				}
+			}
+		}
+
+		while (!q.empty())
+		{
+			Level2::RowCol rc = q.front(); q.pop();
+			visit[rc.row][rc.col] = true;
+
+			for (int m = 0; m < 4; m++)
+			{
+				int newRow = rc.row + iAddX[m];
+				int newCol = rc.col + iAddY[m];
+
+				if (newRow < 0 || newCol < 0 || newRow > 4 || newCol > 4 || visit[newRow][newCol] || places[i][newRow][newCol] == 'X')
+				{
+					continue;
+				}
+				else if(places[i][newRow][newCol] == 'P')
+				{
+					visit[newRow][newCol] = true;
+					answer.push_back(0);
+
+					while (!q.empty())
+					{
+						q.pop();
+					}
+					break;
+				}
+				else  // == 'O'
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						int newnewRow = newRow + iAddX[j];
+						int newnewCol = newCol + iAddY[j];
+
+						if (newnewRow < 0 || newnewCol < 0 || newnewRow > 4 || newnewCol > 4 || visit[newnewRow][newnewCol])
+						{
+							continue;
+						}
+						else if (places[i][newnewRow][newnewCol] == 'P')
+						{
+							visit[newnewRow][newnewCol] = true;
+							answer.push_back(0);
+							m = 4;
+
+							while (!q.empty())
+							{
+								q.pop();
+							}
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		if(i == answer.size())
+			answer.push_back(1);
+	}
+	return answer;
+}
