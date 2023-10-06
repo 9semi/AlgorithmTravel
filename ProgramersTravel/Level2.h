@@ -27,4 +27,5 @@ public:
 	vector<int> FindALargeNumberAtTheBack(vector<int> numbers);
 	long long Dot(int k, int d);
 	vector<int> CheckDistancing(vector<vector<string>> places);
+	int SkillTree(string skill, vector<string> skill_trees);
 };

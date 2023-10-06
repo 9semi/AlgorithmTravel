@@ -661,8 +661,6 @@ long long Level2::Dot(int k, int d)
 	return answer;
 }
 
-
-
 vector<int> Level2::CheckDistancing(vector<vector<string>> places)
 {
 	vector<int> answer;
@@ -742,5 +740,47 @@ vector<int> Level2::CheckDistancing(vector<vector<string>> places)
 		if(i == answer.size())
 			answer.push_back(1);
 	}
+	return answer;
+}
+
+int Level2::SkillTree(string skill, vector<string> skill_trees)
+{
+	int answer = 0;
+
+	for (int i = 0; i < skill_trees.size(); i++)
+	{
+		bool bIsIncrease = true;
+		vector<char> vecTemp;
+		int iCount = 0;
+
+		for (int k = 0; k < skill_trees[i].length(); k++)
+		{
+			vecTemp.push_back(skill_trees[i][k]);
+		}
+
+		while (vecTemp.size() > 0)
+		{
+			int iTemp = skill.find(vecTemp[0]);
+
+			if (vecTemp[0] == skill[iCount])
+			{
+				vecTemp.erase(vecTemp.begin());
+				iCount++;
+			}
+			else if (iTemp > 0)
+			{
+				bIsIncrease = false;
+				break;
+			}
+			else
+			{
+				vecTemp.erase(vecTemp.begin());
+			}
+		}
+
+		if (bIsIncrease)
+			answer++;
+	}
+
 	return answer;
 }

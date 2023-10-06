@@ -32,13 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		vector<vector<string>> places = { {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
-			{"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
-			{"PXOPX", "OXOXP", "OXPOX", "OXXOP", "PXPOX"},
-			{"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
-			{"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"} };
-
-		vector<int> result = L2.CheckDistancing(places);
+		vector<string> vec = { "BACDE", "CBADF", "AECB", "BDA" };
+		int result = L2.SkillTree("CBD", vec);
 		ShowResult(result);
 	}
 }
