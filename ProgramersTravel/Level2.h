@@ -28,4 +28,5 @@ public:
 	long long Dot(int k, int d);
 	vector<int> CheckDistancing(vector<vector<string>> places);
 	int SkillTree(string skill, vector<string> skill_trees);
+	int DiscountEvent(vector<string> want, vector<int> number, vector<string> discount);
 };

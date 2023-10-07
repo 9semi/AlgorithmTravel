@@ -32,8 +32,10 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> vec = { "BACDE", "CBADF", "AECB", "BDA" };
-		int result = L2.SkillTree("CBD", vec);
+		vector<string> want = { "banana", "apple", "rice", "pork", "pot" };
+		vector<int> number = { 3, 2, 2, 2, 1 };
+		vector<string> discount = {"chicken", "apple", "apple", "banana", "rice", "apple", "pork", "banana", "pork", "rice", "pot", "banana", "apple", "banana" };
+		int result = L2.DiscountEvent(want, number, discount);
 		ShowResult(result);
 	}
 }
