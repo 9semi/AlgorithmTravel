@@ -784,3 +784,42 @@ int Level2::SkillTree(string skill, vector<string> skill_trees)
 
 	return answer;
 }
+
+int Level2::DiscountEvent(vector<string> want, vector<int> number, vector<string> discount)
+{
+	int answer = 0;
+	map<string, int> m;
+
+	for (int i = 0; discount.size() - i >= 10 ; i++)
+	{
+		m.clear();
+
+		for (int j = 0; j < want.size(); j++)
+		{
+			m.insert(pair<string, int>(want[j], number[j]));
+		}
+
+		int iEndCount = 0;
+
+		for (int k = i; iEndCount < 10; k++, iEndCount++)
+		{
+			auto data = m.find(discount[k]);
+
+			if (data != m.end())
+			{
+				// Ã£À½
+				m[discount[k]]--;
+
+				if (m[discount[k]] <= 0)
+				{
+					m.erase(discount[k]);
+				}
+			}
+		}
+
+		if (m.empty())
+			answer++;
+	}
+
+	return answer;
+}
