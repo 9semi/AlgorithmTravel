@@ -823,3 +823,121 @@ int Level2::DiscountEvent(vector<string> want, vector<int> number, vector<string
 
 	return answer;
 }
+
+int CalculateFee(int iTotalTime, vector<int> fees)
+{
+	int iFee;
+
+	if (iTotalTime > fees[0])
+	{
+		int iTemp = ceil(static_cast<float>(iTotalTime - fees[0]) / fees[2]);
+		iFee = iTemp * fees[3] + fees[1];
+	}
+	else
+	{
+		iFee = fees[1];
+	}
+
+	return iFee;
+}
+
+int CalculateTime(string hour_minute)
+{
+	istringstream iss(hour_minute);
+	string strHour, strMinute;
+
+	getline(iss, strHour, ':');
+	getline(iss, strMinute);
+
+	int iHour = stoi(strHour);
+	int iMinute = stoi(strMinute);
+
+
+	int iTemp = (iHour * 60) + iMinute;
+
+	return iTemp;
+}
+
+vector<int> Level2::CalculatingParkingFees(vector<int> fees, vector<string> records)
+{
+	vector<int> answer;
+	vector<int> vecCarNumber;
+	map<int, int> carNumber_calculate;
+	map<int, int> carNumber_totalTime;
+
+	for (int i = 0; i < records.size(); i++)
+	{
+		istringstream iss(records[i]);
+		string str;
+		vector<string> stringVector;
+
+		while (iss >> str)
+		{
+			stringVector.push_back(str);
+		}
+
+		auto it1 = carNumber_calculate.find(stoi(stringVector[1]));
+
+		int iTime = CalculateTime(stringVector[0]);
+		int iCarNumber = stoi(stringVector[1]);
+
+		// 계산맵, 해당 키가 없음 : 추가한다.
+		if (it1 == carNumber_calculate.end()) 
+		{
+			carNumber_calculate.insert(pair<int, int>(iCarNumber, iTime));
+
+			auto it2 = find(vecCarNumber.begin(), vecCarNumber.end(), iCarNumber);
+
+			if(it2 == vecCarNumber.end())
+				vecCarNumber.push_back(iCarNumber);
+		}
+		// 계산맵, 해당 키가 있음 : 기존 시간에 부가한다.
+		else
+		{
+			int iInTime = carNumber_calculate[iCarNumber];
+			int iTimeOfUse = iTime - iInTime;
+
+			carNumber_calculate.erase(iCarNumber);
+
+			auto it2 = carNumber_totalTime.find(iCarNumber);
+
+			// 정보맵, 해당 차 번호 키가 없음 : 추가한다.
+			if (it2 == carNumber_totalTime.end())
+			{
+				carNumber_totalTime.insert(pair<int, int>(iCarNumber, iTimeOfUse));
+			}
+			// 정보맵, 해당 차 번호 키가 있음 : 
+			else
+			{
+				carNumber_totalTime[iCarNumber] += iTimeOfUse;
+			}
+		}
+	}
+
+	for (const auto& data : carNumber_calculate)
+	{
+		int iTimeOfUse = CalculateTime("23:59") - data.second;
+
+		auto it = carNumber_totalTime.find(data.first);
+
+		// 정보맵, 해당 차 번호 키가 없음 : 추가한다.
+		if (it == carNumber_totalTime.end())
+		{
+			carNumber_totalTime.insert(pair<int, int>(data.first, iTimeOfUse));
+		}
+		// 정보맵, 해당 차 번호 키가 있음 : 
+		else
+		{
+			carNumber_totalTime[data.first] += iTimeOfUse;
+		}
+	}
+
+	sort(vecCarNumber.begin(), vecCarNumber.end());
+
+	for (int i = 0; i < vecCarNumber.size(); i++)
+	{
+		answer.push_back(CalculateFee(carNumber_totalTime[vecCarNumber[i]], fees));
+	}
+
+	return answer;
+}
