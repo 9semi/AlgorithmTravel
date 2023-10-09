@@ -320,7 +320,7 @@ int Level2::MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2
 }
 
 //                    กๆ  ก็   ก่  ก้
-vector<int> iAddX = { 0, 0, -1, 1 };
+vector<int> iAddX = { 0, 0, 1, -1 };
 vector<int> iAddY = { 1, -1, 0, 0 };
 int Level2::RicochetRobot(vector<string> board)
 {
@@ -840,7 +840,6 @@ int CalculateFee(int iTotalTime, vector<int> fees)
 
 	return iFee;
 }
-
 int CalculateTime(string hour_minute)
 {
 	istringstream iss(hour_minute);
@@ -857,7 +856,6 @@ int CalculateTime(string hour_minute)
 
 	return iTemp;
 }
-
 vector<int> Level2::CalculatingParkingFees(vector<int> fees, vector<string> records)
 {
 	vector<int> answer;
@@ -937,6 +935,101 @@ vector<int> Level2::CalculatingParkingFees(vector<int> fees, vector<string> reco
 	for (int i = 0; i < vecCarNumber.size(); i++)
 	{
 		answer.push_back(CalculateFee(carNumber_totalTime[vecCarNumber[i]], fees));
+	}
+
+	return answer;
+}
+
+struct stPoint
+{
+	int X;
+	int Y;
+
+	stPoint(int x, int y) : X(x), Y(y) { }
+};
+enum eDirection
+{
+	R,
+	L,
+	U,
+	D
+};
+bool IsNewWay(vector<string>& visitCheck, stPoint stCurrentPoint, stPoint stNewPoint, char dir)
+{
+	bool bIsNewWay = false;
+	string strTemp1 = to_string(stCurrentPoint.X) + to_string(stCurrentPoint.Y) + dir;
+	auto it = find(visitCheck.begin(), visitCheck.end(), strTemp1);
+
+	if (it == visitCheck.end())
+	{
+		string strTemp2;
+
+		switch (dir)
+		{
+		case 'R':
+			strTemp2 = to_string(stNewPoint.X) + to_string(stNewPoint.Y) + 'L';
+			break;
+		case 'L':
+			strTemp2 = to_string(stNewPoint.X) + to_string(stNewPoint.Y) + 'R';
+			break;
+		case 'U':
+			strTemp2 = to_string(stNewPoint.X) + to_string(stNewPoint.Y) + 'D';
+			break;
+		case 'D':
+			strTemp2 = to_string(stNewPoint.X) + to_string(stNewPoint.Y) + 'U';
+			break;
+		}
+
+		visitCheck.push_back(strTemp1);
+		visitCheck.push_back(strTemp2);
+		bIsNewWay = true;
+	}
+
+	return bIsNewWay;
+}
+eDirection charToDirection(char c)
+{
+	switch (c)
+	{
+	case 'R':
+		return R;
+	case 'L':
+		return L;
+	case 'U':
+		return U;
+	case 'D':
+		return D;
+	default:
+		return R;
+	}
+}
+int Level2::LengthOfVisit(string dirs)
+{
+	int answer = 0;
+	stPoint stCurrentPoint = stPoint(0, 0);
+	vector<string> visitCheck;
+
+	for (int i = 0; i < dirs.size(); i++)
+	{
+		int addX = iAddX[charToDirection(dirs[i])];
+		int addY = iAddY[charToDirection(dirs[i])];
+
+		int newX = stCurrentPoint.X + addX;
+		int newY = stCurrentPoint.Y + addY;
+
+		stPoint newPoint = stPoint(newX, newY);
+
+		if (newX < -5 || newY < -5 || newX > 5 || newY > 5)
+		{
+			continue;
+		}
+		else
+		{
+			if (IsNewWay(visitCheck, stCurrentPoint, newPoint, dirs[i]))
+				answer++;
+
+			stCurrentPoint = newPoint;
+		}
 	}
 
 	return answer;

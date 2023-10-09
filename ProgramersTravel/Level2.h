@@ -29,5 +29,6 @@ public:
 	vector<int> CheckDistancing(vector<vector<string>> places);
 	int SkillTree(string skill, vector<string> skill_trees);
 	int DiscountEvent(vector<string> want, vector<int> number, vector<string> discount);
-	vector<int> CalculatingParkingFees(vector<int> fees, vector<string> records);
+	vector<int> CalculatingParkingFees(vector<int> fees, vector<string> records); 
+	int LengthOfVisit(string dirs);
 };
