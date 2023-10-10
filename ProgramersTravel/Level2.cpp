@@ -1031,6 +1031,116 @@ int Level2::LengthOfVisit(string dirs)
 			stCurrentPoint = newPoint;
 		}
 	}
+	return answer;
+}
+
+bool compareTime(const std::vector<std::string>& a, const std::vector<std::string>& b) 
+{
+	return a[1] < b[1]; 
+}
+vector<string> Level2::ConductingAProject(vector<vector<string>> plans)
+{
+	sort(plans.begin(), plans.end(), compareTime);
+
+	vector<string> answer;
+	stack<vector<string>> remainingProject;
+	int iCurrentTime = CalculateTime(plans[0][1]);
+
+	while (!plans.empty())
+	{
+		if (iCurrentTime < CalculateTime(plans[0][1]))
+		{
+			if (remainingProject.empty())
+			{
+				iCurrentTime = CalculateTime(plans[0][1]);
+
+				if (plans.size() > 1)
+				{
+					int iTimeSum = stoi(plans[0][2]) + iCurrentTime;
+					int iTimeDifference = CalculateTime(plans[1][1]) - iCurrentTime;
+
+					if (iCurrentTime + iTimeDifference >= iTimeSum)
+					{
+						iCurrentTime = iTimeSum;
+						answer.push_back(plans[0][0]);
+						plans.erase(plans.begin());
+					}
+					else
+					{
+						vector<string> vecTemp = plans[0];
+						int iTemp = stoi(vecTemp[2]);
+						iTemp -= iTimeDifference;
+						iCurrentTime += iTimeDifference;
+						vecTemp[2] = to_string(iTemp);
+						remainingProject.push(vecTemp);
+						plans.erase(plans.begin());
+					}
+				}
+				else
+				{
+					answer.push_back(plans[0][0]);
+					plans.erase(plans.begin());
+				}
+			}
+			else
+			{
+				vector<string> vecTemp = remainingProject.top(); remainingProject.pop();
+				int iTimeSum = iCurrentTime + stoi(vecTemp[2]);
+				int iTimeDifference = CalculateTime(plans[0][1]) - iCurrentTime;
+
+				if (iCurrentTime + iTimeDifference >= iTimeSum)
+				{
+					iCurrentTime = iTimeSum;
+					answer.push_back(vecTemp[0]);
+				}
+				else
+				{
+					int iTemp = stoi(vecTemp[2]);
+					iTemp -= iTimeDifference;
+					iCurrentTime += iTimeDifference;
+					vecTemp[2] = to_string(iTemp);
+					remainingProject.push(vecTemp);
+				}
+			}
+		}
+		else
+		{
+			if (plans.size() > 1)
+			{
+				int iTimeSum = stoi(plans[0][2]) + iCurrentTime;
+				int iTimeDifference = CalculateTime(plans[1][1]) - iCurrentTime;
+
+				if (iCurrentTime + iTimeDifference >= iTimeSum)
+				{
+					iCurrentTime = iTimeSum;
+					answer.push_back(plans[0][0]);
+					plans.erase(plans.begin());
+				}
+				else
+				{
+					vector<string> vecTemp = plans[0];
+					int iTemp = stoi(vecTemp[2]);
+					iTemp -= iTimeDifference;
+					iCurrentTime += iTimeDifference;
+					vecTemp[2] = to_string(iTemp);
+					remainingProject.push(vecTemp);
+					plans.erase(plans.begin());
+				}
+			}
+			else
+			{
+				answer.push_back(plans[0][0]);
+				plans.erase(plans.begin());
+			}
+		}
+	}
+
+	while (!remainingProject.empty())
+	{
+		vector<string> vecTemp = remainingProject.top(); remainingProject.pop();
+
+		answer.push_back(vecTemp[0]);
+	}
 
 	return answer;
 }

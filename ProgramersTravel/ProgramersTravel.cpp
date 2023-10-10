@@ -32,8 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		string dirs = "ULURRDLLU";
-		int result = L2.LengthOfVisit(dirs);
+		vector<vector<string>> plans = { {"A", "11:50", "30"},{"B", "13:00", "20"},{"C", "13:10", "30"} };
+		vector<string> result = L2.ConductingAProject(plans);
 		ShowResult(result);
 	}
 }

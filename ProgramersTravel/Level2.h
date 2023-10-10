@@ -31,4 +31,5 @@ public:
 	int DiscountEvent(vector<string> want, vector<int> number, vector<string> discount);
 	vector<int> CalculatingParkingFees(vector<int> fees, vector<string> records); 
 	int LengthOfVisit(string dirs);
+	vector<string> ConductingAProject(vector<vector<string>> plans);
 };
