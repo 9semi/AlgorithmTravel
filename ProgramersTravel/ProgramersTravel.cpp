@@ -32,8 +32,10 @@ int main()
 	Level3 L3;
 
 	{
-		vector<vector<string>> book_time = { {"15:00", "17:00"},{"16:40", "18:20"},{"14:20", "15:20"},{"14:10", "19:20"},{"18:20", "21:20"} };
-		int result = L2.HotelRoom(book_time);
+		int n = 4;
+		long long left = 7;
+		long long right = 14;
+		vector<int> result = L2.CutArray(n, left, right);
 		ShowResult(result);
 	}
 }
