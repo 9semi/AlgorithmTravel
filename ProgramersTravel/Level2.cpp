@@ -1149,7 +1149,6 @@ bool CompareTime2(const vector<string>& a, vector<string>& b)
 {
 	return a[0] < b[0];
 }
-
 int Level2::HotelRoom(vector<vector<string>> book_time)
 {
 	sort(book_time.begin(), book_time.end(), CompareTime2);
@@ -1182,3 +1181,4 @@ int Level2::HotelRoom(vector<vector<string>> book_time)
 	
 	return vecClosingTime.size();
 }
+
