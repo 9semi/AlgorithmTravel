@@ -32,8 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		vector<vector<string>> plans = { {"A", "11:50", "30"},{"B", "13:00", "20"},{"C", "13:10", "30"} };
-		vector<string> result = L2.ConductingAProject(plans);
+		vector<vector<string>> book_time = { {"15:00", "17:00"},{"16:40", "18:20"},{"14:20", "15:20"},{"14:10", "19:20"},{"18:20", "21:20"} };
+		int result = L2.HotelRoom(book_time);
 		ShowResult(result);
 	}
 }

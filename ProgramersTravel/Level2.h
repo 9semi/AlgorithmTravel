@@ -32,4 +32,5 @@ public:
 	vector<int> CalculatingParkingFees(vector<int> fees, vector<string> records); 
 	int LengthOfVisit(string dirs);
 	vector<string> ConductingAProject(vector<vector<string>> plans);
+	int HotelRoom(vector<vector<string>> book_time);
 };
