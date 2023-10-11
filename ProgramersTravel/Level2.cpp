@@ -1034,13 +1034,13 @@ int Level2::LengthOfVisit(string dirs)
 	return answer;
 }
 
-bool compareTime(const std::vector<std::string>& a, const std::vector<std::string>& b) 
+bool CompareTime(const vector<string>& a, vector<string>& b) 
 {
 	return a[1] < b[1]; 
 }
 vector<string> Level2::ConductingAProject(vector<vector<string>> plans)
 {
-	sort(plans.begin(), plans.end(), compareTime);
+	sort(plans.begin(), plans.end(), CompareTime);
 
 	vector<string> answer;
 	stack<vector<string>> remainingProject;
@@ -1143,4 +1143,42 @@ vector<string> Level2::ConductingAProject(vector<vector<string>> plans)
 	}
 
 	return answer;
+}
+
+bool CompareTime2(const vector<string>& a, vector<string>& b)
+{
+	return a[0] < b[0];
+}
+
+int Level2::HotelRoom(vector<vector<string>> book_time)
+{
+	sort(book_time.begin(), book_time.end(), CompareTime2);
+
+	vector<int> vecClosingTime;
+	vecClosingTime.push_back(CalculateTime(book_time[0][1]) + 10);
+	book_time.erase(book_time.begin());
+
+
+	while (!book_time.empty())
+	{
+		vector<string> vecTemp = book_time[0];
+		book_time.erase(book_time.begin());
+
+		int iCurrentCheckInTime = CalculateTime(vecTemp[0]);
+		int iCurrentCheckOutTime = CalculateTime(vecTemp[1]);
+
+		if (vecClosingTime[0] > iCurrentCheckInTime)
+		{
+			vecClosingTime.push_back(iCurrentCheckOutTime + 10);
+		}
+		else
+		{
+			vecClosingTime[0] = iCurrentCheckOutTime + 10;
+		}
+
+		sort(vecClosingTime.begin(), vecClosingTime.end());
+
+	}
+	
+	return vecClosingTime.size();
 }
