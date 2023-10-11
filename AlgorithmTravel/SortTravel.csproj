@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FE2EBB53-FA6D-45C2-B8A8-EDA021D51832}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AlgorithmTravel</RootNamespace>
-    <AssemblyName>AlgorithmTravel</AssemblyName>
+    <RootNamespace>SortTravel</RootNamespace>
+    <AssemblyName>SortTravel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
