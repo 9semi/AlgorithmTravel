@@ -114,18 +114,6 @@ namespace SortTravel
         public void MergeSort(int[] array, int iStartIndex, int iEndIndex)
         {
             {
-                if(iStartIndex < iEndIndex)
-                {
-                    int iMiddleIndex = (iStartIndex + iEndIndex) / 2;
-
-                    MergeSort(array, iStartIndex, iMiddleIndex);
-                    MergeSort(array, iMiddleIndex + 1, iEndIndex);
-
-                    Merge(array, iStartIndex, iMiddleIndex, iEndIndex);
-                }
-            }
-
-            {
                 //if(iStartIndex < iEndIndex)
                 //{
                 //    int iMiddleIndex = (iStartIndex + iEndIndex) / 2;
@@ -136,40 +124,51 @@ namespace SortTravel
                 //    Merge(array, iStartIndex, iMiddleIndex, iEndIndex);
                 //}
             }
+
+            {
+                if(iStartIndex < iEndIndex)
+                {
+                    int iMiddleIndex = (iStartIndex + iEndIndex) / 2;
+
+                    MergeSort(array, iStartIndex, iMiddleIndex);
+                    MergeSort(array, iMiddleIndex + 1, iEndIndex);
+
+                    Merge(array, iStartIndex, iMiddleIndex, iEndIndex);
+                }
+            }
         }
         void Merge(int[] array, int iStartIndex, int iMiddleIndex, int iEndIndex)
         {
             {
-                int[] arrayTemp = new int[array.Length];
-                int iTempIndex = iStartIndex;
+                int[] arrTemp = new int[array.Length];
+                int iArrTempIndex = iStartIndex;
                 int iFirstPartIndex = iStartIndex;
                 int iSecondPartIndex = iMiddleIndex + 1;
 
-                while(iFirstPartIndex <= iMiddleIndex &&  iSecondPartIndex <= iEndIndex)
+                while(iFirstPartIndex <= iMiddleIndex && iSecondPartIndex <= iEndIndex)
                 {
                     if(array[iFirstPartIndex] < array[iSecondPartIndex])
                     {
-                        arrayTemp[iTempIndex++] = array[iFirstPartIndex++];
+                        arrTemp[iArrTempIndex++] = array[iFirstPartIndex++];
                     }
                     else
                     {
-                        arrayTemp[iTempIndex++] = array[iSecondPartIndex++];
+                        arrTemp[iArrTempIndex++] = array[iSecondPartIndex++];
                     }
                 }
 
-                while (iFirstPartIndex <= iMiddleIndex)
+                while(iFirstPartIndex <= iMiddleIndex)
                 {
-                    arrayTemp[iTempIndex++] = array[iFirstPartIndex++];
+                    arrTemp[iArrTempIndex++] = array[iFirstPartIndex++];
+                }
+                while(iSecondPartIndex <= iEndIndex)
+                {
+                    arrTemp[iArrTempIndex++] = array[iSecondPartIndex++];
                 }
 
-                while (iSecondPartIndex <= iEndIndex)
+                for(int i = iStartIndex; i <= iEndIndex; i++)
                 {
-                    arrayTemp[iTempIndex++] = array[iSecondPartIndex++];
-                }
-
-                for (int i = iStartIndex; i <= iEndIndex; i++)
-                {
-                    array[i] = arrayTemp[i];
+                    array[i] = arrTemp[i];
                 }
             }
 
