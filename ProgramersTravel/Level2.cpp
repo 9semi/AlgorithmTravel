@@ -1182,3 +1182,93 @@ int Level2::HotelRoom(vector<vector<string>> book_time)
 	return vecClosingTime.size();
 }
 
+string PullOneSpace(string s)
+{
+	char chTemp = s[0];
+	s.erase(s.begin());
+	s.push_back(chTemp);
+	return s;
+}
+int Level2::RotatingParentheses(string s)
+{
+	int answer = 0;
+	bool bIsLeft = false;
+	char chCurrentParenthesis;
+
+	stack<char> stackLeft;
+	vector<char> vecLeft = { '(', '[', '{' };
+	vector<char> vecRight = { ')', ']', '}' };
+	map<char, char> mapParentheses;
+
+	for (int i = 0; i < vecLeft.size(); i++) 
+	{
+		mapParentheses.insert(pair<char, char>(vecLeft[i], vecRight[i]));
+	}
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		bool bIsComplete = true;
+
+		for (int k = 0; k < s.size(); k++)
+		{
+			bIsLeft = false;
+			chCurrentParenthesis = s[k];
+
+			for (int n = 0; n < vecLeft.size(); n++)
+			{
+				if (chCurrentParenthesis == vecLeft[n])
+				{
+					bIsLeft = true;
+					break;
+				}
+			}
+
+			if (bIsLeft)
+			{
+				stackLeft.push(chCurrentParenthesis);
+			}
+			else
+			{
+				if (stackLeft.size() > 0)
+				{
+					char chTemp = stackLeft.top(); stackLeft.pop();
+
+					if (mapParentheses[chTemp] == chCurrentParenthesis)
+					{
+						continue;
+					}
+					else
+					{
+						bIsComplete = false;
+						s = PullOneSpace(s);
+						k = s.size();
+					}
+
+				}
+				else
+				{
+					bIsComplete = false;
+					s = PullOneSpace(s);
+					k = s.size();
+				}
+			}
+		}
+		if (stackLeft.empty())
+		{
+			if (bIsComplete)
+			{
+				s = PullOneSpace(s);
+				answer++;
+			}
+		}
+		else
+		{
+			while (!stackLeft.empty())
+			{
+				stackLeft.pop();
+			}
+		}
+	}
+
+	return answer;
+}

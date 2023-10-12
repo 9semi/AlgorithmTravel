@@ -32,10 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		int n = 4;
-		long long left = 7;
-		long long right = 14;
-		vector<int> result = L2.CutArray(n, left, right);
+		string s = "{{{{{{";
+		int result = L2.RotatingParentheses(s);
 		ShowResult(result);
 	}
 }
