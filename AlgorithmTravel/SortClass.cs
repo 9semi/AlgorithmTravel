@@ -211,44 +211,42 @@ namespace SortTravel
         public void QuickSort(int [] array, int iStartIndex, int iEndIndex)
         {
             {
-                if(iStartIndex < iEndIndex)
-                {
-                    int iMiddleIndex = Partition(array, iStartIndex, iEndIndex);
-
-                    QuickSort(array, iStartIndex, iMiddleIndex - 1);
-
-                    QuickSort(array, iMiddleIndex, iEndIndex);
-                }
-            }
-
-            {
                 //if(iStartIndex < iEndIndex)
                 //{
                 //    int iMiddleIndex = Partition(array, iStartIndex, iEndIndex);
 
                 //    QuickSort(array, iStartIndex, iMiddleIndex - 1);
+
                 //    QuickSort(array, iMiddleIndex, iEndIndex);
                 //}
+            }
+
+            {
+                if(iStartIndex < iEndIndex)
+                {
+                    int iMiddleIndex = Partition(array, iStartIndex, iEndIndex);
+
+                    QuickSort(array, iStartIndex, iMiddleIndex - 1);
+                    QuickSort(array, iMiddleIndex, iEndIndex);
+                }
             }
         }
         public int Partition(int [] array, int iStartIndex, int iEndIndex)
         {
             {
-                int iMiddleIndex = (iStartIndex + iEndIndex) / 2;
-                int iKey = array[iMiddleIndex];
+                int iPivotData = array[(iStartIndex + iEndIndex) / 2];
 
                 while(iStartIndex <= iEndIndex)
                 {
-                    while (array[iStartIndex] < iKey)
+                    while(iPivotData > array[iStartIndex])
                     {
                         iStartIndex++;
                     }
-
-                    while (array[iEndIndex] > iKey)
+                    while(iPivotData < array[iEndIndex])
                     {
                         iEndIndex--;
                     }
-                    
+
                     if(iStartIndex <= iEndIndex)
                     {
                         int iTemp = array[iStartIndex];
@@ -261,6 +259,7 @@ namespace SortTravel
                 }
 
                 return iStartIndex;
+                
             }
 
             {
