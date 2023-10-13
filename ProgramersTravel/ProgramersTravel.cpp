@@ -32,8 +32,10 @@ int main()
 	Level3 L3;
 
 	{
-		string s = "{{{{{{";
-		int result = L2.RotatingParentheses(s);
+		int rows = 6;
+		int columns = 6;
+		vector<vector<int>> queries = { {2,2,5,4},{3,3,6,6},{5,1,6,3} };
+		vector<int> result = L2.RotatingMatrixBorders(rows, columns, queries);
 		ShowResult(result);
 	}
 }

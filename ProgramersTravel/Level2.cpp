@@ -1272,3 +1272,64 @@ int Level2::RotatingParentheses(string s)
 
 	return answer;
 }
+
+vector<int> Level2::RotatingMatrixBorders(int rows, int columns, vector<vector<int>> queries)
+{
+	vector<int> answer;
+	vector<vector<int>> vecBoard(rows, vector<int>(columns, 0));
+
+	int iNumber = 1;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int k = 0; k < columns; k++)
+		{
+			vecBoard[i][k] = iNumber;
+			iNumber++;
+		}
+	}
+
+	for (int i = 0; i < queries.size(); i++)
+	{
+		vector<int> vecTemp = queries[i];
+		vector<int> vecBorder;
+
+		int row1 = vecTemp[0] - 1; // 2
+		int row2 = vecTemp[2] - 1; // 5
+		int col1 = vecTemp[1] - 1; // 2
+		int col2 = vecTemp[3] - 1; // 4
+
+		int iTemp = vecBoard[row1][col1];
+
+		for (int k = row1 + 1; k <= row2; k++)
+		{
+			vecBorder.push_back(vecBoard[k][col1]);
+			vecBoard[k - 1][col1] = vecBoard[k][col1];
+		}
+
+		for (int k = col1 + 1; k <= col2; k++)
+		{
+			vecBorder.push_back(vecBoard[row2][k]);
+			vecBoard[row2][k - 1] = vecBoard[row2][k];
+		}
+
+		for (int k = row2 - 1; k >= row1; k--)
+		{
+			vecBorder.push_back(vecBoard[k][col2]);
+			vecBoard[k + 1][col2] = vecBoard[k][col2];
+		}
+
+		for (int k = col2 - 1; k >= col1; k--)
+		{
+			vecBorder.push_back(vecBoard[row1][k]);
+			vecBoard[row1][k + 1] = vecBoard[row1][k];
+		}
+
+		vecBorder.push_back(iTemp);
+		vecBoard[row1][col1 + 1] = iTemp;
+
+		sort(vecBorder.begin(), vecBorder.end());
+		answer.push_back(vecBorder[0]);
+	}
+	
+	return answer;
+}
