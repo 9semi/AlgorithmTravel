@@ -32,10 +32,9 @@ int main()
 	Level3 L3;
 
 	{
-		int rows = 6;
-		int columns = 6;
-		vector<vector<int>> queries = { {2,2,5,4},{3,3,6,6},{5,1,6,3} };
-		vector<int> result = L2.RotatingMatrixBorders(rows, columns, queries);
+		int k = 1;
+		vector<int> tangerine = { 1 };
+		int result = L2.PickTangerine(k, tangerine);
 		ShowResult(result);
 	}
 }

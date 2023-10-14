@@ -15,7 +15,6 @@ public:
 
 	int InterceptionSystem(vector<vector<int>> targets);
 	int TargetNumber(vector<int> numbers, int target);
-	int GameMapShortestDistance(vector<vector<int>> maps);
 	vector<int> SumOfSuccessivePartialSequences(vector<int> sequence, int k);
 	vector<int> DesertedIslandTrip(vector<string> maps);
 	int MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2);
@@ -35,4 +34,6 @@ public:
 	int HotelRoom(vector<vector<string>> book_time);
 	int RotatingParentheses(string s);
 	vector<int> RotatingMatrixBorders(int rows, int columns, vector<vector<int>> queries);
+	int GameMapShortestDistance(vector<vector<int> > maps);
+	int PickTangerine(int k, vector<int> tangerine);
 };

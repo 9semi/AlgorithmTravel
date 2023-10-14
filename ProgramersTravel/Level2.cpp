@@ -80,75 +80,6 @@ int Level2::InterceptionSystem(vector<vector<int>> targets)
 	return iAnswer;
 }
 
-int addRow[4] = { -1, 0, 1, 0 };
-int addCol[4] = { 0, 1, 0 , -1 };
-struct RowCol
-{
-	int row, col;
-
-	RowCol(int iRow, int iCol) { row = iRow; col = iCol; }
-};
-int GameMapShortestDistanceBFS(vector<vector<int>> maps)
-{
-	RowCol rc(0, 0);
-
-	queue<RowCol> q;
-	q.push(rc);
-
-	int iMaxRow = maps.size();
-	int iMaxCol = maps[0].size();
-
-	vector<vector<bool>> visit(iMaxRow, vector<bool>(iMaxCol));
-	visit[0][0] = true;
-
-	vector<vector<int>> distance(iMaxRow, vector<int>(iMaxCol));
-	distance[0][0] = 1;
-
-	while (!q.empty())
-	{
-		int iCurrentRow = q.front().row;
-		int iCurrentCol = q.front().col;
-		q.pop();
-
-		for (int i = 0; i < 4; i++)
-		{
-			int iNextRow = iCurrentRow + addRow[i];
-			int iNextCol = iCurrentCol + addCol[i];
-
-			if (iNextRow < 0 
-				|| iNextRow > iMaxRow - 1
-				|| iNextCol < 0
-				|| iNextCol > iMaxCol - 1)
-				continue;
-
-			if (maps[iNextRow][iNextCol] == 0)
-				continue;
-
-			if (visit[iNextRow][iNextCol])
-				continue;
-
-			RowCol temp(iNextRow, iNextCol);
-			q.push(temp);
-			visit[iNextRow][iNextCol] = true;
-			distance[iNextRow][iNextCol] = distance[iCurrentRow][iCurrentCol] + 1;
-		}
-	}
-	if (!visit[iMaxRow - 1][iMaxCol - 1])
-		return -1;
-	else
-		return distance[iMaxRow - 1][iMaxCol - 1];
-
-}
-int Level2::GameMapShortestDistance(vector<vector<int>> maps)
-{
-	int iGoalPositionX = maps.size() - 1;
-	int iGoalPositionY = maps[0].size() - 1;
-
-	if (maps[iGoalPositionX - 1][iGoalPositionY] == 0 && maps[iGoalPositionX - 1][iGoalPositionY - 1] == 0 && maps[iGoalPositionX][iGoalPositionY - 1] == 0)
-		return -1;
-	else
-		return GameMapShortestDistanceBFS(maps);
-}
 vector<int> Level2::SumOfSuccessivePartialSequences(vector<int> sequence, int k)
 {
 	vector<int> answer;
@@ -427,7 +358,7 @@ int EscapeTheMazeBFS(vector<string> maps, char startWord, char targetWord)
 	int iMaxY = maps[0].size();
 
 	queue<tuple<int, int, int>> q;
-	int visit[100][100] = { 0, };
+	int visit[100][100];
 
 	q.push({ iStartX, iStartY, 0 });
 
@@ -448,7 +379,7 @@ int EscapeTheMazeBFS(vector<string> maps, char startWord, char targetWord)
 			int newX = iCurrentX + iAddX[i];
 			int newY = iCurrentY + iAddY[i];
 
-			if (newX >= iMaxX || newX < 0 || newY >= iMaxY || newY < 0)
+			if (newX < 0 || newY < 0 || newX >= iMaxX || newY >= iMaxY )
 				continue;
 			if (maps[newX][newY] == 'X')
 				continue;
@@ -1331,5 +1262,104 @@ vector<int> Level2::RotatingMatrixBorders(int rows, int columns, vector<vector<i
 		answer.push_back(vecBorder[0]);
 	}
 	
+	return answer;
+}
+
+int addRow[4] = { -1, 0, 1, 0 };
+int addCol[4] = { 0, 1, 0 , -1 };
+struct RowCol
+{
+	int row, col;
+
+	RowCol(int iRow, int iCol) { row = iRow; col = iCol; }
+};
+int GameMapShortestDistanceBFS(vector<vector<int>> maps)
+{
+	queue<RowCol> q;
+	RowCol rc(0, 0);
+	q.push(rc);
+
+	int iMaxCol = maps[0].size();
+	int iMaxRow = maps.size();
+
+	vector<vector<bool>> visit(iMaxRow, vector<bool>(iMaxCol, false));
+	visit[0][0] = true;
+
+	vector<vector<int>> distance(iMaxRow, vector<int>(iMaxCol, 0));
+	distance[0][0] = 1;
+
+	while (!q.empty())
+	{
+		int iCurrentRow = q.front().row;
+		int iCurrentCol = q.front().col;
+		q.pop();
+
+		for (int i = 0; i < 4; i++)
+		{
+			int iNextRow = iCurrentRow + addRow[i];
+			int iNextCol = iCurrentCol + addCol[i];
+
+			if (iNextRow < 0 || iNextCol < 0 || iNextRow > iMaxRow - 1 ||  iNextCol > iMaxCol - 1)
+				continue;
+
+			if (maps[iNextRow][iNextCol] == 0)
+				continue;
+
+			if (visit[iNextRow][iNextCol])
+				continue;
+
+			RowCol temp(iNextRow, iNextCol);
+			q.push(temp);
+			visit[iNextRow][iNextCol] = true;
+			distance[iNextRow][iNextCol] = distance[iCurrentRow][iCurrentCol] + 1;
+		}
+	}
+	if (!visit[iMaxRow - 1][iMaxCol - 1])
+		return -1;
+	else
+		return distance[iMaxRow - 1][iMaxCol - 1];
+
+}
+int Level2::GameMapShortestDistance(vector<vector<int> > maps)
+{
+	int iGoalPositionX = maps.size() - 1;
+	int iGoalPositionY = maps[0].size() - 1;
+
+	if (maps[iGoalPositionX - 1][iGoalPositionY] == 0 && maps[iGoalPositionX][iGoalPositionY - 1] == 0)
+		return -1;
+	else if (maps[0][1] == 0 && maps[1][0] == 0)
+		return -1;
+	else
+		return GameMapShortestDistanceBFS(maps);
+}
+
+bool CompareSecond(const std::pair<int, int>& a, const std::pair<int, int>& b) 
+{
+	return a.second > b.second;
+}
+int Level2::PickTangerine(int k, vector<int> tangerine)
+{
+	int answer = 0;
+	int iSum = 0;
+
+	map<int, int> mapTangerine;
+	
+	for (int i = 0; i < tangerine.size(); i++)
+	{
+		mapTangerine[tangerine[i]]++;
+	}
+
+	vector<pair<int, int>> vecTangerine(mapTangerine.begin(), mapTangerine.end());
+	sort(vecTangerine.begin(), vecTangerine.end(), CompareSecond);
+	
+	for (int i = 0; i < vecTangerine.size(); i++)
+	{
+		iSum += vecTangerine[i].second;
+		answer++;
+
+		if (iSum >= k)
+			break;
+	}
+
 	return answer;
 }
