@@ -1363,3 +1363,51 @@ int Level2::PickTangerine(int k, vector<int> tangerine)
 
 	return answer;
 }
+
+vector<string> Level2::OpenChatRoom(vector<string> record)
+{
+	vector<string> answer;
+	map<string, string> mapUidName;
+	vector<string> vecRecordOrder; // Uid, Enter/Leave
+
+	for (int i = 0; i < record.size(); i++) 
+	{
+		vector<string> vecRecordData; // 0: Enter, Leave		1: uid			2: 이름
+		istringstream iss(record[i]);
+		string strTemp;
+		
+		while (iss >> strTemp)
+		{
+			vecRecordData.push_back(strTemp);
+		}
+		if(vecRecordData[0] != "Leave")
+			mapUidName[vecRecordData[1]] = vecRecordData[2];
+
+		if(vecRecordData[0] == "Enter" || vecRecordData[0] == "Leave")
+			vecRecordOrder.push_back(vecRecordData[1] + " " + vecRecordData[0]);
+	}
+
+	for (int i = 0; i < vecRecordOrder.size(); i++)
+	{
+		string result;
+		vector<string> vecRecordData;
+		istringstream iss(vecRecordOrder[i]);
+		string strTemp;
+
+		while (iss >> strTemp)
+		{
+			vecRecordData.push_back(strTemp);
+		}
+
+		result = mapUidName[vecRecordData[0]];
+		
+		if(vecRecordData[1] == "Enter")
+			result += "님이 들어왔습니다.";
+		else
+			result += "님이 나갔습니다.";
+
+		answer.push_back(result);
+	}
+
+	return answer;
+}

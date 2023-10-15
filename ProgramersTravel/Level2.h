@@ -36,4 +36,5 @@ public:
 	vector<int> RotatingMatrixBorders(int rows, int columns, vector<vector<int>> queries);
 	int GameMapShortestDistance(vector<vector<int> > maps);
 	int PickTangerine(int k, vector<int> tangerine);
+	vector<string> OpenChatRoom(vector<string> record);
 };
