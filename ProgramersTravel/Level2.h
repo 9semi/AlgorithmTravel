@@ -38,4 +38,5 @@ public:
 	int PickTangerine(int k, vector<int> tangerine);
 	vector<string> OpenChatRoom(vector<string> record);
 	int DefenseGame(int n, int k, vector<int> enemy);
+	int CutRollCake(vector<int> topping);
 };

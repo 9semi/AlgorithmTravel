@@ -32,10 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		int n = 7; 
-		int k = 3;
-		vector<int> enemy = { 4, 2, 4, 5, 3, 3, 1 };
-		int result = L2.DefenseGame(n, k, enemy);
+		vector<int> topping = { 1, 2, 3, 1, 4 };
+		int result = L2.CutRollCake(topping);
 		ShowResult(result);
 	}
 }

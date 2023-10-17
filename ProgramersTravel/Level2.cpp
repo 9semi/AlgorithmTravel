@@ -1441,3 +1441,32 @@ int Level2::DefenseGame(int n, int k, vector<int> enemy)
 
 	return answer;
 }
+
+int Level2::CutRollCake(vector<int> topping){
+	int answer = 0;
+	map<int, int> mapFirst, mapSecond;
+
+	for (int i = 0; i < topping.size(); i++)
+	{
+		mapFirst[topping[i]]++;
+	}
+
+	for (int i = topping.size() - 1; i >= 0; i--)
+	{
+		int iData = topping[i];
+		mapFirst[iData]--;
+		mapSecond[iData]++;
+
+		if (mapFirst[iData] <= 0)
+		{
+			mapFirst.erase(iData);
+		}
+
+		if (mapFirst.size() == mapSecond.size())
+		{
+			answer++;
+		}
+	}
+
+	return answer;
+}
