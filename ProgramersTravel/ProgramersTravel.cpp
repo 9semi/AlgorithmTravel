@@ -32,8 +32,10 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> record = { "Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan" };
-		vector<string> result = L2.OpenChatRoom(record);
+		int n = 7; 
+		int k = 3;
+		vector<int> enemy = { 4, 2, 4, 5, 3, 3, 1 };
+		int result = L2.DefenseGame(n, k, enemy);
 		ShowResult(result);
 	}
 }

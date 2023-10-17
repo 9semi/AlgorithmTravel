@@ -1411,3 +1411,33 @@ vector<string> Level2::OpenChatRoom(vector<string> record)
 
 	return answer;
 }
+
+int Level2::DefenseGame(int n, int k, vector<int> enemy)
+{
+	int answer = 0;
+	priority_queue<int> queueDescending;
+
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		n = n - enemy[i];
+		queueDescending.push(enemy[i]);
+		answer++;
+
+		if (n < 0)
+		{
+			n += queueDescending.top(); queueDescending.pop();
+
+			if (k > 0)
+			{
+				k--;
+			}
+			else
+			{
+				answer--;
+				break;
+			}
+		}
+	}
+
+	return answer;
+}

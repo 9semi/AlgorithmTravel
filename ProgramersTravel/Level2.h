@@ -37,4 +37,5 @@ public:
 	int GameMapShortestDistance(vector<vector<int> > maps);
 	int PickTangerine(int k, vector<int> tangerine);
 	vector<string> OpenChatRoom(vector<string> record);
+	int DefenseGame(int n, int k, vector<int> enemy);
 };
