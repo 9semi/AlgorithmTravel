@@ -40,4 +40,5 @@ public:
 	int DefenseGame(int n, int k, vector<int> enemy);
 	int CutRollCake(vector<int> topping);
 	int Fatigability(int k, vector<vector<int>> dungeons);
+	int Lifeboat(vector<int> people, int limit);
 };

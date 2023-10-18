@@ -1471,18 +1471,17 @@ int Level2::CutRollCake(vector<int> topping){
 	return answer;
 }
 
-vector<bool> bVecVisit;
+vector<bool> bVecFatigabilityVisit;
 int iFatigabilityAnswer = 0;
-
 void FatigabilityDFS(int k, vector<vector<int>> dungeons, int count)
 {
 	for (int i = 0; i < dungeons.size(); i++)
 	{
-		if (!bVecVisit[i] && k >= dungeons[i][0])
+		if (!bVecFatigabilityVisit[i] && k >= dungeons[i][0])
 		{
-			bVecVisit[i] = true;
+			bVecFatigabilityVisit[i] = true;
 			FatigabilityDFS(k - dungeons[i][1], dungeons, count + 1);
-			bVecVisit[i] = false;
+			bVecFatigabilityVisit[i] = false;
 		}
 	}
 
@@ -1491,8 +1490,44 @@ void FatigabilityDFS(int k, vector<vector<int>> dungeons, int count)
 }
 int Level2::Fatigability(int k, vector<vector<int>> dungeons)
 {
-	bVecVisit.resize(dungeons.size());
+	bVecFatigabilityVisit.resize(dungeons.size());
 	FatigabilityDFS(k, dungeons, 0);
 
 	return iFatigabilityAnswer;
+}
+
+int Level2::Lifeboat(vector<int> people, int limit)
+{
+	int answer=0;
+	int iLeftIndex = 0;
+	int iRightIndex = people.size() - 1;
+	
+	vector<int> iVecAscending = people;
+	
+	sort(iVecAscending.begin(), iVecAscending.end());
+
+	while (iLeftIndex <= iRightIndex)
+	{
+		if (iLeftIndex == iRightIndex)
+		{
+			iRightIndex--;
+		}
+		else
+		{
+			int iSum = iVecAscending[iLeftIndex] + iVecAscending[iRightIndex];
+
+			if (iSum <= limit)
+			{
+				iLeftIndex++; iRightIndex--;
+			}
+			else
+			{
+				iRightIndex--;
+			}
+		}
+
+		answer++;
+	}
+
+	return answer;
 }

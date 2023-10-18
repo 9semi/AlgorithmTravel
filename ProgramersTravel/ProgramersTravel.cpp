@@ -32,9 +32,9 @@ int main()
 	Level3 L3;
 
 	{
-		int k = 80;
-		vector<vector<int>> dungeons = { {80,20},{50,40},{30,10} };
-		int result = L2.Fatigability(k, dungeons);
+		int limit = 100;
+		vector<int> people = { 70, 50, 80, 50 };
+		int result = L2.Lifeboat(people, limit);
 		ShowResult(result);
 	}
 }
