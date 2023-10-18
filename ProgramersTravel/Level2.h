@@ -39,4 +39,5 @@ public:
 	vector<string> OpenChatRoom(vector<string> record);
 	int DefenseGame(int n, int k, vector<int> enemy);
 	int CutRollCake(vector<int> topping);
+	int Fatigability(int k, vector<vector<int>> dungeons);
 };

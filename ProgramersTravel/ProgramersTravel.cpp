@@ -32,8 +32,9 @@ int main()
 	Level3 L3;
 
 	{
-		vector<int> topping = { 1, 2, 3, 1, 4 };
-		int result = L2.CutRollCake(topping);
+		int k = 80;
+		vector<vector<int>> dungeons = { {80,20},{50,40},{30,10} };
+		int result = L2.Fatigability(k, dungeons);
 		ShowResult(result);
 	}
 }

@@ -1470,3 +1470,29 @@ int Level2::CutRollCake(vector<int> topping){
 
 	return answer;
 }
+
+vector<bool> bVecVisit;
+int iFatigabilityAnswer = 0;
+
+void FatigabilityDFS(int k, vector<vector<int>> dungeons, int count)
+{
+	for (int i = 0; i < dungeons.size(); i++)
+	{
+		if (!bVecVisit[i] && k >= dungeons[i][0])
+		{
+			bVecVisit[i] = true;
+			FatigabilityDFS(k - dungeons[i][1], dungeons, count + 1);
+			bVecVisit[i] = false;
+		}
+	}
+
+	if (iFatigabilityAnswer < count)
+		iFatigabilityAnswer = count;
+}
+int Level2::Fatigability(int k, vector<vector<int>> dungeons)
+{
+	bVecVisit.resize(dungeons.size());
+	FatigabilityDFS(k, dungeons, 0);
+
+	return iFatigabilityAnswer;
+}
