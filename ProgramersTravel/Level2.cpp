@@ -154,7 +154,7 @@ bool SearchRangeDistinction(vector<string> maps, int searchRow, int searchCol)
 }
 void DesertedIslandTripBFS(vector<string> maps, int currentRow, int currentCol)
 {
-	int sum = 0;
+	int iSum = 0;
 	queue<pair<int, int>> qBFS;
 	qBFS.push({ currentRow, currentCol });
 	bArrVisitPlace[currentRow][currentCol] = true;
@@ -164,7 +164,7 @@ void DesertedIslandTripBFS(vector<string> maps, int currentRow, int currentCol)
 		int x = qBFS.front().first;
 		int y = qBFS.front().second;
 
-		sum += maps[x][y] - '0';
+		iSum += maps[x][y] - '0';
 		qBFS.pop();
 
 		for (int i = 0; i < 4; i++)
@@ -180,7 +180,7 @@ void DesertedIslandTripBFS(vector<string> maps, int currentRow, int currentCol)
 		}
 	}
 
-	answer.push_back(sum);
+	answer.push_back(iSum);
 }
 vector<int> Level2::DesertedIslandTrip(vector<string> maps)
 {
