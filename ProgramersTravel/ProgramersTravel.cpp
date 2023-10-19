@@ -32,9 +32,8 @@ int main()
 	Level3 L3;
 
 	{
-		int limit = 100;
-		vector<int> people = { 70, 50, 80, 50 };
-		int result = L2.Lifeboat(people, limit);
+		vector<string> maps = { "SOOOL","XXXXO","OOOOO","OXXXX","OOOOE" };
+		int result = L2.EscapeTheMaze(maps);
 		ShowResult(result);
 	}
 }

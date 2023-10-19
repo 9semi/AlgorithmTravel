@@ -2,6 +2,10 @@
 
 using namespace std;
 
+//                ก่   กๆ  ก้  ก็     
+int addRow[4] = { -1, 0, 1, 0 };
+int addCol[4] = { 0, 1, 0 , -1 };
+
 int iAnswer = 0;
 int TargetNumberBFS(vector<int> numbers, int target)
 {
@@ -250,7 +254,7 @@ int Level2::MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2
 	return answer;
 }
 
-//                    กๆ  ก็   ก่  ก้
+
 vector<int> iAddX = { 0, 0, 1, -1 };
 vector<int> iAddY = { 1, -1, 0, 0 };
 int Level2::RicochetRobot(vector<string> board)
@@ -338,69 +342,76 @@ int Level2::RicochetRobot(vector<string> board)
 
 int EscapeTheMazeBFS(vector<string> maps, char startWord, char targetWord)
 {
-	int iStartX = -1, iStartY = -1;
-
+	bool visit[100][100] = { false, };
+	int iStartRow = -1, iStartCol = -1;
+	int iMaxRow = maps.size() - 1, iMaxCol = maps[0].size() - 1;
+	int iCurrentRow, iCurrentCol, iCurrentCount;
+	queue<vector<int>> qBFS;
+	
 	for (int i = 0; i < maps.size(); i++)
 	{
 		for (int k = 0; k < maps[0].size(); k++)
 		{
 			if (maps[i][k] == startWord)
 			{
-				iStartX = i; iStartY = k;
+				iStartRow = i;
+				iStartCol = k;
+				i = maps.size();
 				break;
 			}
 		}
-		if (iStartX > -1)
-			break;
-	}
+	}  
 
-	int iMaxX = maps.size();
-	int iMaxY = maps[0].size();
+	vector<int> vecTemp = { iStartRow, iStartCol, 0 };
+	visit[iStartRow][iStartCol] = true;
+	qBFS.push(vecTemp);
 
-	queue<tuple<int, int, int>> q;
-	int visit[100][100];
-
-	q.push({ iStartX, iStartY, 0 });
-
-	while (!q.empty())
+	while (!qBFS.empty())
 	{
-		int iCurrentX = get<0>(q.front());
-		int iCurrentY = get<1>(q.front());
-		int iCurrentCount = get<2>(q.front());
-		q.pop();
+		vecTemp = qBFS.front(); qBFS.pop();
+		iCurrentRow = vecTemp[0];
+		iCurrentCol = vecTemp[1];
+		iCurrentCount = vecTemp[2];
 
-		if (maps[iCurrentX][iCurrentY] == targetWord)
+		if (maps[iCurrentRow][iCurrentCol] == targetWord)
 		{
 			return iCurrentCount;
 		}
 
 		for (int i = 0; i < 4; i++)
 		{
-			int newX = iCurrentX + iAddX[i];
-			int newY = iCurrentY + iAddY[i];
+			int iNewRow = iCurrentRow + addRow[i];
+			int iNewCol = iCurrentCol + addCol[i];
 
-			if (newX < 0 || newY < 0 || newX >= iMaxX || newY >= iMaxY )
+			if (iNewRow < 0 || iNewCol < 0 || iNewRow > iMaxRow || iNewCol > iMaxCol)
 				continue;
-			if (maps[newX][newY] == 'X')
-				continue;
-			if (visit[newX][newY] == 1)
+			if (maps[iNewRow][iNewCol] == 'X' || visit[iNewRow][iNewCol])
 				continue;
 
-			q.push({ newX, newY, iCurrentCount + 1 });
-			visit[iCurrentX][iCurrentY] = 1;
+			qBFS.push({ iNewRow, iNewCol, iCurrentCount + 1 });
+			visit[iNewRow][iNewCol] = true;
 		}
 	}
+
 	return -1;
 }
 int Level2::EscapeTheMaze(vector<string> maps)
 {
 	int iFindL = EscapeTheMazeBFS(maps, 'S', 'L');
-	int iFindE = EscapeTheMazeBFS(maps, 'L', 'E');
 
-	if (iFindL < 0 || iFindE < 0)
+	if (iFindL < 0)
+	{
 		return -1;
+	}
 	else
-		return iFindE + iFindL;
+	{
+		int iFindE = EscapeTheMazeBFS(maps, 'L', 'E');
+
+		if (iFindE < 0)
+			return -1;
+		else
+			return iFindL + iFindE;
+	}
 }
 
 long long  Level2::SeesawPartner(vector<int> weights)
@@ -1265,8 +1276,6 @@ vector<int> Level2::RotatingMatrixBorders(int rows, int columns, vector<vector<i
 	return answer;
 }
 
-int addRow[4] = { -1, 0, 1, 0 };
-int addCol[4] = { 0, 1, 0 , -1 };
 struct RowCol
 {
 	int row, col;
