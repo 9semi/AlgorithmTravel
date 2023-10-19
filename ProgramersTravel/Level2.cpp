@@ -254,7 +254,6 @@ int Level2::MakeTheSumOfTheTwoQueuesEqual(vector<int> queue1, vector<int> queue2
 	return answer;
 }
 
-
 vector<int> iAddX = { 0, 0, 1, -1 };
 vector<int> iAddY = { 1, -1, 0, 0 };
 int Level2::RicochetRobot(vector<string> board)
@@ -1539,4 +1538,71 @@ int Level2::Lifeboat(vector<int> people, int limit)
 	}
 
 	return answer;
+}
+
+string Level2::MakingLargeNumber(string number, int k)
+{
+	bool bFirstWhile = true;
+	bool bSecondWhile = true;
+
+	while (bFirstWhile)
+	{
+		int iChangeCount = 0;
+
+		for (int i = 1; i <= number.size(); i++)
+		{
+			if (number[i - 1] < number[i] && k > 0)
+			{
+				number.erase(i - 1, 1);
+				k--;
+				iChangeCount++;
+
+				if (k < 1)
+				{
+					bFirstWhile = false;
+				}
+
+				break;
+			}
+		}
+
+		if (iChangeCount == 0)
+			break;
+	}
+
+	if (k > 0)
+	{
+		while (bSecondWhile)
+		{
+			int iChangeCount = 0;
+
+			for (int i = number.size() - 1; i > 0; i--)
+			{
+				if (number[i - 1] < number[i] && k > 0)
+				{
+					number.erase(i - 1, 1);
+					k--;
+					iChangeCount++;
+
+					if (k < 1)
+					{
+						bSecondWhile = false;
+					}
+
+					break;
+				}
+			}
+
+			if (iChangeCount == 0)
+				break;
+		}
+	}
+
+	while (k != 0)
+	{
+		number.erase(number.size() - 1, 1);
+		k--;
+	}
+
+	return number;
 }

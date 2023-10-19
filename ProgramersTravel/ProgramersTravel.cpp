@@ -25,6 +25,11 @@ void ShowResult(int result)
 	cout << result << endl;
 }
 
+void ShowResult(string result)
+{
+	cout << result << endl;
+}
+
 int main()
 {
 	Level1 L1;
@@ -32,8 +37,13 @@ int main()
 	Level3 L3;
 
 	{
-		vector<string> maps = { "SOOOL","XXXXO","OOOOO","OXXXX","OOOOE" };
-		int result = L2.EscapeTheMaze(maps);
+
+	}
+
+	{
+		string number = { "4321" };
+		int k = 1;
+		string result = L2.MakingLargeNumber(number, k);
 		ShowResult(result);
 	}
 }

@@ -41,4 +41,5 @@ public:
 	int CutRollCake(vector<int> topping);
 	int Fatigability(int k, vector<vector<int>> dungeons);
 	int Lifeboat(vector<int> people, int limit);
+	string MakingLargeNumber(string number, int k);
 };
