@@ -1606,3 +1606,29 @@ string Level2::MakingLargeNumber(string number, int k)
 
 	return number;
 }
+
+int Level2::SumOfContinuousSequence(vector<int> elements)
+{
+	map<int, int> mElement;
+	int iEndIndex = elements.size();
+
+	for (int i = 0; i < iEndIndex; i++)
+	{
+		elements.push_back(elements[i]);
+	}
+
+	for (int i = 0; i < iEndIndex; i++)
+	{
+		int iSum = 0;
+
+		for (int k = 0; k < iEndIndex; k++)
+		{
+			int iIndex = i + k;
+			iSum += elements[iIndex];
+
+			mElement[iSum] = 1;
+		}
+	}
+
+	return mElement.size();
+}

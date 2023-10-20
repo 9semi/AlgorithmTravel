@@ -36,14 +36,10 @@ int main()
 	Level2 L2;
 	Level3 L3;
 
-	{
-
-	}
 
 	{
-		string number = { "4321" };
-		int k = 1;
-		string result = L2.MakingLargeNumber(number, k);
+		vector<int> elements = { 7,9,1,1,4 };
+		int result = L2.SumOfContinuousSequence(elements);
 		ShowResult(result);
 	}
 }
