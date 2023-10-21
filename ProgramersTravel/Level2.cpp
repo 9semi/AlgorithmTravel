@@ -1,5 +1,4 @@
 #include "Level2.h"
-
 using namespace std;
 
 //                ก่   กๆ  ก้  ก็     
@@ -1631,4 +1630,73 @@ int Level2::SumOfContinuousSequence(vector<int> elements)
 	}
 
 	return mElement.size();
+}
+
+int Level2::ParcelBox(vector<int> order)
+{
+	int answer = 0;
+	int iOrderIndex = 0;
+	queue<int> queueOrder;
+	queue<int> queueNumber;
+	stack<int> stackSubContainer;
+
+	for (int i = 0; i < order.size(); i++)
+	{
+		queueOrder.push(order[i]);
+		queueNumber.push(i + 1);
+	}
+
+	while (!queueNumber.empty())
+	{
+		int iOrder = queueOrder.front();
+		int iNumber = queueNumber.front(); 
+
+		if (iOrder == iNumber)
+		{
+			queueOrder.pop();
+			queueNumber.pop();
+			answer++;
+		}
+		else
+		{
+			if (stackSubContainer.size() > 0)
+			{
+				int iSub = stackSubContainer.top();
+
+				if (iOrder == iSub)
+				{
+					queueOrder.pop();
+					stackSubContainer.pop();
+					answer++;
+				}
+				else
+				{
+					stackSubContainer.push(iNumber);
+					queueNumber.pop();
+				}
+			}
+			else
+			{
+				stackSubContainer.push(iNumber);
+				queueNumber.pop();
+			}
+		}
+	}
+
+	while (!stackSubContainer.empty() && !queueOrder.empty())
+	{
+		int iSub = stackSubContainer.top(); stackSubContainer.pop();
+		int iOrder = queueOrder.front(); queueOrder.pop();
+
+		if (iSub == iOrder)
+		{
+			answer++;
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	return answer;
 }

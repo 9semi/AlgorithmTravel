@@ -38,8 +38,8 @@ int main()
 
 
 	{
-		vector<int> elements = { 7,9,1,1,4 };
-		int result = L2.SumOfContinuousSequence(elements);
+		vector<int> order = { 5,4,3,2,1 };
+		int result = L2.ParcelBox(order);
 		ShowResult(result);
 	}
 }

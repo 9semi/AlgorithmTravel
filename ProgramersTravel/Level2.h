@@ -43,4 +43,5 @@ public:
 	int Lifeboat(vector<int> people, int limit);
 	string MakingLargeNumber(string number, int k);
 	int SumOfContinuousSequence(vector<int> elements);
+	int ParcelBox(vector<int> order);	
 };
