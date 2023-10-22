@@ -1700,3 +1700,79 @@ int Level2::ParcelBox(vector<int> order)
 
 	return answer;
 }
+
+int GreatestCommonDivisor(int a, int b)
+{
+	while (b != 0)
+	{
+		int iTemp = b;
+		b = a % b;
+		a = iTemp;
+	}
+
+	return a;
+}
+bool IsItDivided(int iOtherGCD, vector<int> arr)
+{
+	if (iOtherGCD == 1)
+		return true;
+
+	for (int i = 0; i < arr.size(); i++)
+	{
+		if (arr[i] % iOtherGCD == 0)
+			return true;
+	}
+
+	return false;
+}
+int Level2::ShareTheNumberCards(vector<int> arrayA, vector<int> arrayB)
+{
+	int iArrayAGCD, iArrayBGCD;
+
+	if (arrayA.size() > 1)
+	{
+		iArrayAGCD = GreatestCommonDivisor(arrayA[0], arrayA[1]);
+
+		for (int i = 1; i < arrayA.size(); i++)
+		{
+			iArrayAGCD = GreatestCommonDivisor(iArrayAGCD, arrayA[i]);
+		}
+	}
+	else
+	{
+		iArrayAGCD = arrayA[0];
+	}
+
+	if (arrayB.size() > 1)
+	{
+		iArrayBGCD = GreatestCommonDivisor(arrayB[0], arrayB[1]);
+
+		for (int i = 1; i < arrayB.size(); i++)
+		{
+			iArrayBGCD = GreatestCommonDivisor(iArrayBGCD, arrayB[i]);
+		}
+
+	}
+	else
+	{
+		iArrayBGCD = arrayB[0];
+	}
+
+	if (IsItDivided(iArrayAGCD, arrayB))
+		iArrayAGCD = 1;
+
+	if (IsItDivided(iArrayBGCD, arrayA))
+		iArrayBGCD = 1;
+
+	if (iArrayAGCD == 1 && iArrayBGCD == 1)
+		return 0;
+	else
+	{
+		if (iArrayAGCD > iArrayBGCD)
+			return iArrayAGCD;
+		else
+			return iArrayBGCD;
+	}
+
+	return 0;
+}

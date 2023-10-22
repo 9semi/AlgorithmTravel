@@ -44,4 +44,5 @@ public:
 	string MakingLargeNumber(string number, int k);
 	int SumOfContinuousSequence(vector<int> elements);
 	int ParcelBox(vector<int> order);	
+	int ShareTheNumberCards(vector<int> arrayA, vector<int> arrayB);
 };

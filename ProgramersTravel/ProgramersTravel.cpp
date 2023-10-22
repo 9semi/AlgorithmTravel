@@ -38,8 +38,9 @@ int main()
 
 
 	{
-		vector<int> order = { 5,4,3,2,1 };
-		int result = L2.ParcelBox(order);
+		vector<int> arrayA = { 10, 17};
+		vector<int> arrayB = { 5,20 };
+		int result = L2.ShareTheNumberCards(arrayA, arrayB);
 		ShowResult(result);
 	}
 }
