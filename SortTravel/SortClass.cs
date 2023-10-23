@@ -11,11 +11,28 @@ namespace SortTravel
         public void BubbleSort(int[] array)
         {
             {
-                //for (int i = 0; i < array.Length - 1; i++)
-                //{
-                //    int iEndNumber = array.Length - i;
+                for(int i = 0; i < array.Length - 1; i++)
+                {
+                    int iEndNumber = array.Length - i;
 
-                //    for(int k = 1; k < iEndNumber; k++)
+                    for (int k = 1; k < iEndNumber; k++)
+                    {
+                        if (array[k - 1] > array[k])
+                        {
+                            int iTemp = array[k-1];
+                            array[k-1] = array[k];
+                            array[k] = iTemp;
+                        }
+                    }
+                }
+            }
+
+            {
+                //for(int i = 0; i < array.Length - 1; i++)
+                //{
+                //    int iEnd = array.Length - 1;
+
+                //    for(int k = 1; k < iEnd; k++)
                 //    {
                 //        if (array[k - 1] > array[k])
                 //        {
@@ -26,29 +43,12 @@ namespace SortTravel
                 //    }
                 //}
             }
-
-            {
-                for(int i = 0; i < array.Length - 1; i++)
-                {
-                    int iEnd = array.Length - 1;
-
-                    for(int k = 1; k < iEnd; k++)
-                    {
-                        if (array[k - 1] > array[k])
-                        {
-                            int iTemp = array[k];
-                            array[k] = array[k - 1];
-                            array[k - 1] = iTemp;
-                        }
-                    }
-                }
-            }
         }
 
         public void SelectionSort(int[] array)
         {
             {
-                for(int i = 0; i < array.Length - 1; i++)
+                for (int i = 0; i < array.Length - 1; i++)
                 {
                     for (int k = i + 1; k < array.Length; k++)
                     {
@@ -80,13 +80,13 @@ namespace SortTravel
 
         public void InsertionSort(int[] array)
         {
-            { 
-                for(int i = 1; i < array.Length; i++)
+            {
+                for (int i = 1; i < array.Length; i++)
                 {
-                    int k = i - 1;
                     int iKey = array[i];
+                    int k = i - 1;
 
-                    for(; k >= 0 && array[k] > iKey; k--)
+                    for(; k >= 0 && iKey < array[k]; k--)
                     {
                         array[k + 1] = array[k];
                     }
@@ -171,8 +171,7 @@ namespace SortTravel
                     array[i] = arrTemp[i];
                 }
             }
-
-
+            
             {
                 //int[] arrTemp = new int[array.Length];
                 //int tempArrayIndex = iStartIndex;
