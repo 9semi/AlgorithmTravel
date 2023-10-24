@@ -38,9 +38,9 @@ int main()
 
 
 	{
-		vector<int> arrayA = { 10, 17};
-		vector<int> arrayB = { 5,20 };
-		int result = L2.ShareTheNumberCards(arrayA, arrayB);
+		int n = 437674;
+		int k = 3;
+		int result = L2.FindDecimalCountsOfDecimal(n, k);
 		ShowResult(result);
 	}
 }

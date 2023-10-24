@@ -1776,3 +1776,82 @@ int Level2::ShareTheNumberCards(vector<int> arrayA, vector<int> arrayB)
 
 	return 0;
 }
+
+bool IsPrimeNumber(string strNumber)
+{
+	long iNumber = stol(strNumber);
+
+	if (iNumber <= 1)
+		return false;
+	if (iNumber <= 3)
+		return true;
+	if (iNumber % 2 == 0 || iNumber % 3 == 0)
+		return false;
+
+	for (int i = 2; i <= sqrt(iNumber); i++)
+	{
+		if (iNumber % i == 0) 
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+string ChangingTheDecimal(int iDecimalNumber, int iBase)
+{
+	string strResult = "";
+
+	while (iDecimalNumber > 0)
+	{
+		int remainder = iDecimalNumber % iBase;
+		char digit;
+
+		if (remainder < 10)
+			digit = '0' + remainder;
+		else
+			digit = 'A' + (remainder - 10);
+
+		strResult = digit + strResult;
+		iDecimalNumber /= iBase;
+	}
+
+	return strResult;
+}
+int Level2::FindDecimalCountsOfDecimal(int n, int k)
+{
+	int answer = 0;
+	string strNotation = ChangingTheDecimal(n, k);
+	char chDelimiter = '0'; // ±¸ºÐÀÚ
+	vector<string> vecNumbers;
+	string strCurrentPart = "";
+
+	for (char c : strNotation)
+	{
+		if (chDelimiter == c)
+		{
+			if (!strCurrentPart.empty())
+			{
+				vecNumbers.push_back(strCurrentPart);
+				strCurrentPart.clear();
+			}
+		}
+		else
+		{
+			strCurrentPart += c;
+		}
+	}
+
+	if (!strCurrentPart.empty())
+	{
+		vecNumbers.push_back(strCurrentPart);
+	}
+
+	for (int i = 0; i < vecNumbers.size(); i++)
+	{
+		if (IsPrimeNumber(vecNumbers[i]))
+			answer++;
+	}
+
+	return answer;
+}

@@ -45,4 +45,5 @@ public:
 	int SumOfContinuousSequence(vector<int> elements);
 	int ParcelBox(vector<int> order);	
 	int ShareTheNumberCards(vector<int> arrayA, vector<int> arrayB);
+	int FindDecimalCountsOfDecimal(int n, int k);
 };
