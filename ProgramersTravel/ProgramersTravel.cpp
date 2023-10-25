@@ -38,9 +38,8 @@ int main()
 
 
 	{
-		int n = 437674;
-		int k = 3;
-		int result = L2.FindDecimalCountsOfDecimal(n, k);
+		string s = "aabbaccc";
+		int result = L2.StringCompression(s);
 		ShowResult(result);
 	}
 }

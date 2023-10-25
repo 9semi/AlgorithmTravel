@@ -46,4 +46,5 @@ public:
 	int ParcelBox(vector<int> order);	
 	int ShareTheNumberCards(vector<int> arrayA, vector<int> arrayB);
 	int FindDecimalCountsOfDecimal(int n, int k);
+	int StringCompression(string s);
 };

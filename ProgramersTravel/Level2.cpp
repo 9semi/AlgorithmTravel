@@ -1855,3 +1855,70 @@ int Level2::FindDecimalCountsOfDecimal(int n, int k)
 
 	return answer;
 }
+
+int Level2::StringCompression(string s)
+{
+	int answer = s.size();
+	int iHalf = s.size() / 2;
+	
+	for (int i = 1; i <= iHalf; i++)
+	{
+		vector<string> vecCuttedString;
+		int iCount = 1;
+		int iIndex = 0;
+		int iVectorIndex = 0;
+		string strTemp = "";
+		string strResult = "";
+
+		for (int k = 0; k < s.size(); k++)
+		{
+			if (iIndex < i)
+			{	
+				iIndex++;
+			}
+			else
+			{
+				vecCuttedString.push_back(strTemp);
+				strTemp = "";
+				iIndex = 1;
+			}
+
+			strTemp += s[k];
+		}
+
+		if (strTemp.size() > 0)
+			vecCuttedString.push_back(strTemp);
+
+		while (iVectorIndex < vecCuttedString.size() - 1)
+		{
+			if (vecCuttedString[iVectorIndex] == vecCuttedString[iVectorIndex + 1])
+			{
+				iCount++;
+			}
+			else
+			{
+				if (iCount == 1)
+				{
+					strResult += vecCuttedString[iVectorIndex];
+				}
+				else
+				{
+					strResult += to_string(iCount) + vecCuttedString[iVectorIndex];
+					iCount = 1;
+				}
+			}
+
+			iVectorIndex++;
+		}
+
+		if (iCount == 1)
+			strResult += vecCuttedString[iVectorIndex];
+		else
+			strResult += to_string(iCount) + vecCuttedString[iVectorIndex];
+
+		if (answer > strResult.size())
+			answer = strResult.size();
+	}
+
+	return answer;
+}
