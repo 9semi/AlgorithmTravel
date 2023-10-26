@@ -16,5 +16,6 @@ public:
 	vector<int> PersonalInformationCollectionPeriod(string today, vector<string> terms, vector<string> privacies);
 	int KnightsWeapon(int number, int limit, int power);
 	vector<int> TheNearestLetter(string s);
+	int SeparatingStrings(string s);
 };
 

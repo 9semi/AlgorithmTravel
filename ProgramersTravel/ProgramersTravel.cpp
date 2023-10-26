@@ -38,8 +38,8 @@ int main()
 
 
 	{
-		string s = "banana";
-		vector<int> result = L1.TheNearestLetter(s);
+		string s = "abracadabra";
+		int result = L1.SeparatingStrings(s);
 		ShowResult(result);
 	}
 }

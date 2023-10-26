@@ -525,3 +525,42 @@ vector<int> Level1::TheNearestLetter(string s)
 
 	return answer;
 }
+
+int Level1::SeparatingStrings(string s)
+{
+	char chStandard = '\0';
+	int answer = 0;
+	int iStandardCount = 0;
+	int iCompareCount = 0;
+
+	for (int i = 0; i < s.size(); i++) 
+	{
+		if (chStandard == '\0')
+		{
+			iStandardCount++;
+			chStandard = s[i];
+			continue;
+		}
+
+		if (chStandard == s[i])
+		{
+			iStandardCount++;
+		}
+		else
+		{
+			iCompareCount++;
+		}
+
+		if (iStandardCount == iCompareCount)
+		{
+			chStandard = '\0';
+			answer++;
+		}
+	}
+
+	if (chStandard != '\0')
+		answer++;
+
+	
+	return answer;
+}
