@@ -490,3 +490,38 @@ int Level1::KnightsWeapon(int number, int limit, int power)
 
 	return answer;
 }
+
+vector<int> Level1::TheNearestLetter(string s)
+{
+	vector<int> answer;
+	map<char, int> mapLetter;
+
+	for (int i = 0; i < s.size(); i++)
+	{
+		char chTemp = s[i];
+
+		if (mapLetter.empty())
+		{
+			mapLetter.insert(pair<char, int>(chTemp, i));
+			answer.push_back(-1);
+		}
+		else
+		{
+			map<char, int>::iterator it = mapLetter.find(chTemp);
+
+			if (it == mapLetter.end()) // 찾지 못했다.
+			{
+				mapLetter[chTemp] = i;
+				answer.push_back(-1);
+			}
+			else
+			{
+				int iTemp = mapLetter[chTemp];
+				answer.push_back(i - iTemp);
+				mapLetter[chTemp] = i;
+			}
+		}
+	}
+
+	return answer;
+}

@@ -15,5 +15,6 @@ public:
 	string SecretCodeForTheTwo(string s, string skip, int index);
 	vector<int> PersonalInformationCollectionPeriod(string today, vector<string> terms, vector<string> privacies);
 	int KnightsWeapon(int number, int limit, int power);
+	vector<int> TheNearestLetter(string s);
 };
 

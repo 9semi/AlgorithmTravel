@@ -38,8 +38,8 @@ int main()
 
 
 	{
-		string s = "aabbaccc";
-		int result = L2.StringCompression(s);
+		string s = "banana";
+		vector<int> result = L1.TheNearestLetter(s);
 		ShowResult(result);
 	}
 }
