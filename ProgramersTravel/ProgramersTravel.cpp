@@ -38,8 +38,8 @@ int main()
 
 
 	{
-		string s = "abracadabra";
-		int result = L1.SeparatingStrings(s);
+		string numbers = "011";
+		int result = L2.FindPrimeNumbers(numbers);
 		ShowResult(result);
 	}
 }

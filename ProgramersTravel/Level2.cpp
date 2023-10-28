@@ -1922,3 +1922,49 @@ int Level2::StringCompression(string s)
 
 	return answer;
 }
+
+vector<int> vecPrimeNumbers;
+map<int, int> mapFindPrimeNumbers;
+vector<bool> vecFindPrimeNumbersVisit;
+void FindPrimeNumbersDFS(vector<int> vecNumbers, int iIndex, string strCurrentNumber)
+{
+	if (iIndex >= vecNumbers.size())
+		return;
+
+	for (int i = 0; i < vecNumbers.size(); i++)
+	{
+		if (!vecFindPrimeNumbersVisit[i])
+		{
+			string strNewNumber = strCurrentNumber + to_string(vecNumbers[i]);
+			int iNewNumber = stoi(strNewNumber);
+
+			if (mapFindPrimeNumbers[iNewNumber] == 0)
+			{
+				mapFindPrimeNumbers[iNewNumber] = 1;
+
+				if (IsPrimeNumber(strNewNumber))
+					vecPrimeNumbers.push_back(iNewNumber);
+			}
+
+			vecFindPrimeNumbersVisit[i] = true;
+			FindPrimeNumbersDFS(vecNumbers, iIndex + 1, strNewNumber);
+			vecFindPrimeNumbersVisit[i] = false;
+
+		}
+	}
+}
+int Level2::FindPrimeNumbers(string numbers)
+{
+	vector<int> vecNumbers;
+
+	vecFindPrimeNumbersVisit.resize(numbers.size());
+
+	for (int i = 0; i < numbers.size(); i++)
+	{
+		vecNumbers.push_back(numbers[i] - '0');
+	}
+
+	FindPrimeNumbersDFS(vecNumbers, 0, "");
+
+	return vecPrimeNumbers.size();
+}
