@@ -17,5 +17,6 @@ public:
 	int KnightsWeapon(int number, int limit, int power);
 	vector<int> TheNearestLetter(string s);
 	int SeparatingStrings(string s);
+	int FruitVendor(int k, int m, vector<int> score);
 };
 

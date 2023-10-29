@@ -38,8 +38,10 @@ int main()
 
 
 	{
-		string numbers = "011";
-		int result = L2.FindPrimeNumbers(numbers);
+		int k = 5;
+		int m = 10;
+		vector<int> score = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+		int result = L1.FruitVendor(k, m, score);
 		ShowResult(result);
 	}
 }

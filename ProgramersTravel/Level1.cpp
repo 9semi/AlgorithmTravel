@@ -564,3 +564,25 @@ int Level1::SeparatingStrings(string s)
 	
 	return answer;
 }
+
+int iFruitVendorAnswer = 0;
+bool Descending(int a, int b)
+{
+	return a > b;
+}
+int Level1::FruitVendor(int k, int m, vector<int> score)
+{
+	// k : 가장 비싼 사과, m : 한 박스에 들어가는 사과의 수, score : 현재 가지고 있는 사과들의 가격
+
+	sort(score.begin(), score.end(), Descending);
+
+	for (int i = 0; i < score.size(); i += m)
+	{
+		if (i + m - 1 >= score.size())
+			continue;
+
+		iFruitVendorAnswer += score[i + m - 1] * m;
+	}
+
+	return iFruitVendorAnswer;
+}
