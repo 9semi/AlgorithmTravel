@@ -1968,3 +1968,77 @@ int Level2::FindPrimeNumbers(string numbers)
 
 	return vecPrimeNumbers.size();
 }
+
+vector<vector<bool>> visitCheck;
+map<int, int> col_score;
+
+void PCCPQuestionBFS(vector<vector<int>> land, int row, int col)
+{
+	map<int, int> colMap;
+	queue<pair<int, int>> q;
+	
+	int scoreCount = 1;
+	int rowMax = land.size() - 1;
+	int colMax = land[0].size() - 1;
+
+	visitCheck[row][col] = true;
+	q.push({ row,col });
+	colMap[col] = 1;
+	
+	while (!q.empty())
+	{
+		int currentRow = q.front().first;
+		int currentCol = q.front().second;
+		q.pop();
+
+		for (int i = 0; i < iRow.size(); i++)
+		{
+			int newRow = currentRow + iRow[i];
+			int newCol = currentCol + iCol[i];
+
+			if (newRow < 0 || newCol < 0 || newRow > rowMax || newCol > colMax || visitCheck[newRow][newCol] || land[newRow][newCol] == 0)
+				continue;
+
+			visitCheck[newRow][newCol] = true;
+			q.push({ newRow, newCol });
+			colMap[newCol] = 1;
+			scoreCount += 1;
+		}
+	}
+
+	for (const auto& entry : colMap)
+	{
+		col_score[entry.first] += scoreCount;
+	}
+}
+int Level2::PCCPQuestion1(vector<vector<int>> land)
+{
+	int max = 0;
+	int row = land.size();
+	int col = land[0].size();
+
+	visitCheck.resize(row, std::vector<bool>(col, false));
+
+	for (int i = 0; i < row; i++)
+	{
+		for (int k = 0; k < col; k++)
+		{
+			if (visitCheck[i][k])
+				continue;
+			if (land[i][k] == 1)
+				continue;
+
+			PCCPQuestionBFS(land, i, k);
+		}
+	}
+
+	for (int i = 0; i < col; i++)
+	{
+		if (max < col_score[i])
+		{
+			max  = col_score[i];
+		}
+	}
+
+	return max;
+}

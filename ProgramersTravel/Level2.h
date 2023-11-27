@@ -48,4 +48,5 @@ public:
 	int FindDecimalCountsOfDecimal(int n, int k);
 	int StringCompression(string s);
 	int FindPrimeNumbers(string numbers);
+	int PCCPQuestion1(vector<vector<int>> land);
 };

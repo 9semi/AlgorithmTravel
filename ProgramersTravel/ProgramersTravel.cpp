@@ -36,12 +36,13 @@ int main()
 	Level2 L2;
 	Level3 L3;
 
-
 	{
-		int k = 5;
-		int m = 10;
-		vector<int> score = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-		int result = L1.FruitVendor(k, m, score);
+		vector<vector<int>> land = { {0, 0, 0, 1, 1, 1, 0, 0}, 
+									{0, 0, 0, 0, 1, 1, 0, 0},
+									{1, 1, 0, 0, 0, 1, 1, 0},
+									{1, 1, 1, 0, 0, 0, 0, 0}, 
+									{1, 1, 1, 0, 0, 0, 1, 1} };
+		int result = L2.PCCPQuestion1(land);
 		ShowResult(result);
 	}
 }
